@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EntryScreenActivity"
+    android:id="@+id/parentDinnerSection"
+
+    >
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".activity.EntryScreenActivity"
+        android:padding="10dp"
+        android:elevation="10dp"
+        card_view:cardElevation="5dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/dinnerCardView"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/appGrey"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/topTitleDinner"
+                android:padding="4dp"
+                android:weightSum="2"
+                android:background="@drawable/borderbottom"
+
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Dinner"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1.8"
+                    />
+
+                <Button
+                    android:backgroundTint="@color/greyButton"
+                    android:layout_width="50dp"
+                    android:layout_height= "50dp"
+                    android:layout_weight="0.2"
+                    android:drawableTop="@drawable/ic_add"
+                    android:id="@+id/addNewDinner"
+
+                    />
+
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/dinnerRecycleView"
+                android:background="@drawable/borderbottom"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/bottomTotalCalDinnerContainer"
+                android:padding="4dp"
+                android:weightSum="2"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Total"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:id="@+id/totalDinnerCaloriesPlaceholder"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="4200 kcal"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:id="@+id/totalDinnerCalories"
+                    />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

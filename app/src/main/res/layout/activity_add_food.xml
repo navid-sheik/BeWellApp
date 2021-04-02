@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parentEntryFood">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:layout_marginTop="20dp"
+            android:text= "Food Entry"
+            android:textAlignment="center"
+            android:id="@+id/titleAddFoodEnty"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/containerExtraFeatureFood"
+            android:layout_below="@+id/titleAddFoodEnty"
+            android:layout_marginTop="30dp"
+            android:weightSum="2"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="SCANNER"
+                android:id="@+id/scannerFoodEntry"
+                android:backgroundTint="@color/greyButton"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                app:cornerRadius="2dp"
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="FOOD LIST"
+                android:id="@+id/cancelFitnessEntry"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/greyButton"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:cornerRadius="2dp"
+
+                />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_food"
+            app:startIconContentDescription="Food"
+            android:hint="Food Name"
+            android:layout_below="@+id/containerExtraFeatureFood"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/foodNameInputLayout"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/nameFoodTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_food"
+            app:startIconContentDescription="Food"
+            android:hint="Calories"
+            android:layout_below="@+id/foodNameInputLayout"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/foodCaloriesInputLayout"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional | Hint For protein"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/foodCaloriesInputTxtFiled"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_food"
+            app:startIconContentDescription="Food"
+            android:hint="Protein"
+            android:layout_below="@+id/foodCaloriesInputLayout"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/foodProteinInputLayout"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional | Hint For protein"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/foodProteinInputTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_food"
+            app:startIconContentDescription="Food"
+            android:hint="Carbohydrates"
+            android:layout_below="@+id/foodProteinInputLayout"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/foodCarbInputLayout"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional | Hint For Carb"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/foodCarbInputTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_food"
+            app:startIconContentDescription="Food"
+            android:hint="Fats"
+            android:layout_below="@+id/foodCarbInputLayout"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/foodFatsInputLayout"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional | Hint For Fats"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/foodFatsInputTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/buttonEntryFitness"
+            android:layout_below="@+id/foodFatsInputLayout"
+            android:layout_marginTop="30dp"
+            android:weightSum="2"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CONFIRM"
+                android:id="@+id/confirmFoodEntry"
+                android:backgroundTint="@color/greyButton"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                app:cornerRadius="50dp"
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CANCEL"
+                android:id="@+id/cancelFoodEntry"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/greyButton"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:cornerRadius="50dp"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>

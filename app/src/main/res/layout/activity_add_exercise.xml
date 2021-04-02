@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".entryScreens.ExerciseEntry"
+    android:background="@color/white"
+    android:id="@+id/parentEntryExercise"
+    android:padding="20dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:layout_marginTop="20dp"
+        android:text= "Workout Entry"
+        android:textAlignment="center"
+        android:id="@+id/titleAddEnty"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic__fitness_center"
+        app:startIconContentDescription="Fitness"
+        android:hint="Workout Name"
+        android:layout_below="@+id/titleAddEnty"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/workoutNameInputLayout"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/greyButton"
+            android:id="@+id/nameWorkoutTxtField"
+            android:inputType="text"
+            android:maxLines="1"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repAndSetContainer"
+        android:weightSum="2"
+        android:layout_below="@+id/workoutNameInputLayout"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic__fitness_center"
+            app:startIconContentDescription="Fitness"
+            android:hint="Sets Workout"
+            android:id="@+id/workoutSetInputLayout"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional"
+            android:layout_weight="1"
+            android:layout_marginEnd="3.5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/setWorkoutTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/workoutRepInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic__fitness_center"
+            app:startIconContentDescription="Fitness"
+            android:hint="Rep Workout"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Optional"
+            android:layout_weight="1"
+            android:layout_marginStart="3.5dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greyButton"
+                android:id="@+id/repWorkoutTxtField"
+                android:inputType="text"
+                android:maxLines="1"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic__fitness_center"
+        app:startIconContentDescription="Fitness"
+        android:hint="Duration"
+        android:layout_below="@+id/repAndSetContainer"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/workoutDurationInputLayout"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:helperText="Optional | Min"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/greyButton"
+            android:id="@+id/durationWorkoutTxtField"
+            android:inputType="text"
+            android:maxLines="1"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic__fitness_center"
+        app:startIconContentDescription="Fitness"
+        android:hint="Calories Burned"
+        android:layout_below="@+id/workoutDurationInputLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/workoutCaloriesBurnedInputLayout"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:helperText="Kcal"
+        >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/greyButton"
+        android:id="@+id/caloriesBurnedWorkoutTxtField"
+        android:inputType="text"
+        android:maxLines="1"
+
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/buttonEntryFitness"
+        android:layout_below="@+id/workoutCaloriesBurnedInputLayout"
+        android:layout_marginTop="30dp"
+        android:weightSum="2"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:id="@+id/confirmFitnessEntry"
+            android:backgroundTint="@color/greyButton"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            app:cornerRadius="50dp"
+
+        />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:id="@+id/cancelFitnessEntry"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/greyButton"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:cornerRadius="50dp"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

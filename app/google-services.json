@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "617445261078",
+    "firebase_url": "https://bewell-eacc2-default-rtdb.firebaseio.com",
+    "project_id": "bewell-eacc2",
+    "storage_bucket": "bewell-eacc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617445261078:android:dbcf1c9cd7fd9beccb9a37",
+        "android_client_info": {
+          "package_name": "com.example.bewell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617445261078-183kgh6epmau24kah18goi8c2smp9d41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYsb83_mx6_TE1TWcxVCzsZ2X-NZM9eP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617445261078-183kgh6epmau24kah18goi8c2smp9d41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
