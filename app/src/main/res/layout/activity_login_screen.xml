@@ -1,77 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginScreenActivity">
+    tools:context="com.example.bewell.activity.LoginScreenActivity">
 
-
-    <!-- For testing purpose   -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_food"
-        app:startIconContentDescription="Food"
-        android:hint="Food Name"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/randomTextLayout"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        >
+        android:clickable="true"
+        android:text="Forgot your password?"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554"
+        android:focusable="true" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/greyButton"
-            android:id="@+id/randomTxtField"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="146dp"
+        android:layout_height="27dp"
+        android:fontFamily="sans-serif-black"
+        android:text="BeWell"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
 
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/passText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_food"
-        app:startIconContentDescription="Food"
+        android:ems="10"
         android:hint="Password"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/randomPassowordLayout"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        android:layout_below="@+id/randomTextLayout"
-        >
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353"
+        android:autofillHints="" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/greyButton"
-            android:id="@+id/randomPasswordField"
-            android:inputType="text"
-            android:maxLines="1"
-
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+    <EditText
+        android:id="@+id/userText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Username "
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.251"
+        android:autofillHints="" />
 
     <Button
-        android:backgroundTint="@color/black"
-        android:layout_width="200dp"
-        android:layout_height= "50dp"
-        android:layout_weight="0.2"
-        android:text="Submit"
-        android:id="@+id/testFirebaseButton"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/randomPassowordLayout"
-        android:enabled="true"
-        />
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00BCD4"
+        android:text="Login"
+        app:iconTint="#00BCD4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.738"
+        app:rippleColor="#00BCD4" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Sign up"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825"
+        android:focusable="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
