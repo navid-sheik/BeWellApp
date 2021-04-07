@@ -1,69 +1,21 @@
 package com.example.bewell.activity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import com.example.bewell.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SettingsScreenActivity extends AppCompatActivity {
-
-
-    private TextView name, email, password;
-    private TextView surname;
-    private DatabaseReference profileUserRef;
-    private FirebaseAuth mAuth;
-    private String currentUserId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
-
-        mAuth = FirebaseAuth.getInstance();
-        currentUserId = mAuth.getCurrentUser().getUid();
-        profileUserRef= FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-
-
-        name = (TextView) findViewById(R.id.PersonName);
-        surname = (TextView) findViewById(R.id.Surname);
-        email = (TextView) findViewById(R.id.email);
-        password = (TextView) findViewById(R.id.password);
-
-        ValueEventListener eventListener = profileUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String username = snapshot.child("name").getValue().toString();
-                    String sur_name = snapshot.child("surname").getValue().toString();
-                    String emailID = snapshot.child("email").getValue().toString();
-                    String password_ = snapshot.child("password").getValue().toString();
-
-                    name.setText(username);
-                    surname.setText(sur_name);
-                    email.setText(emailID);
-                    password.setText(password_);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
         setUpBottomNavigation();
@@ -98,11 +50,5 @@ public class SettingsScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    public void update_profile(View view) {
-
-        Intent intent = new Intent(this, UpdateProfile.class);
-        startActivity(intent);
     }
 }
