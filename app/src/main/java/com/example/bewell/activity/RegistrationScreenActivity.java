@@ -64,8 +64,22 @@ public class RegistrationScreenActivity extends AppCompatActivity {
                 String password = passwordV.getText().toString().trim();
                 String password2 = password2V.getText().toString().trim();
                 boolean type = getIntent().getExtras().getBoolean("type");
+                final String Expn =
+                        "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                                +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                                +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                                +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                                +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                                +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
                 if(!terms.isChecked()) {
                     Toast.makeText(getApplicationContext(), "You need to accept terms and conditions first", Toast.LENGTH_SHORT).show();
+                }
+                else if(email.isEmpty() || id.isEmpty() || name.isEmpty() || surname.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please complete the form first", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(!email.matches(Expn)){
+                    Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.length() < 7 || !password.matches(".*\\d.*")){
                     Toast.makeText(getApplicationContext(), "Password must be at least 6 characters long and include a number", Toast.LENGTH_SHORT).show();
