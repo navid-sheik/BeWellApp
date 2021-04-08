@@ -2,18 +2,11 @@ package com.example.bewell.models;
 
 public class User {
     private String name;
-    private String surname;
-    private String id;
     private String age;
-    private String weight;
-    private boolean type;
-    public User(){
 
-    }
-    public User(String name, String surname,String id,boolean type) {
+    public User(String name, String age) {
         this.name = name;
-        this.surname = surname;
-        this.type = type;
+        this.age = age;
     }
 
     public String getName() {
@@ -26,15 +19,6 @@ public class User {
 
     public String getAge() {
         return age;
-    }
-    public String getSurname() {
-        return surname;
-    }
-    public boolean getType(){
-        return type;
-    }
-    public String getWeight() {
-        return weight;
     }
 
     public void setAge(String age) {
