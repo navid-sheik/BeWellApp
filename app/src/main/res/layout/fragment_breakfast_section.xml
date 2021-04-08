@@ -69,6 +69,7 @@
                 android:layout_height="200dp"
                 android:id="@+id/brekfastRecycleView"
                 android:background="@drawable/borderbottom"
+                tools:context=".activity.EntryScreenActivity"
                 />
 
             <LinearLayout

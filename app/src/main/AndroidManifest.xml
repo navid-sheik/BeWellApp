@@ -27,6 +27,7 @@
             </intent-filter>
 
 
+
         </activity>
         <activity android:name=".activity.RegistrationScreenActivity" />
         <activity android:name=".activity.HelpScreenActivity" />
@@ -37,7 +38,10 @@
             android:name=".entryScreens.AddFood"
             android:label="@string/title_activity_add_food" />
         <activity android:name=".entryScreens.ExerciseEntry" />
-        <activity android:name=".activity.EntryScreenActivity" />
+        <activity android:name=".activity.EntryScreenActivity" >
+
+
+        </activity>
     </application>
 
 </manifest>

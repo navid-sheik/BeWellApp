@@ -10,16 +10,32 @@ public class Meal implements Parcelable {
     private String mealDate;
     private ArrayList<Food> foods;
 
+
     public Meal(String id, String mealDate, ArrayList<Food> foods) {
         this.id = id;
         this.mealDate = mealDate;
         this.foods = foods;
+
+
     }
+
 
     protected Meal(Parcel in) {
         id = in.readString();
         mealDate = in.readString();
         foods = in.createTypedArrayList(Food.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(mealDate);
+        dest.writeTypedList(foods);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -58,15 +74,5 @@ public class Meal implements Parcelable {
         this.foods = foods;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(mealDate);
-        dest.writeTypedList(foods);
-    }
 }

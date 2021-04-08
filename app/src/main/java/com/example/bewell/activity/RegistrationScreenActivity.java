@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,12 +18,14 @@ import com.example.bewell.R;
 import com.example.bewell.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegistrationScreenActivity extends AppCompatActivity {
+public class
+RegistrationScreenActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     private CheckBox terms;
@@ -132,6 +135,36 @@ public class RegistrationScreenActivity extends AppCompatActivity {
 
 
 
+    }
+
+    //Set up the bottom navigation
+    private void setUpBottomNavigation() {
+        BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
+        bottomNavigationView1.setSelectedItemId(R.id.SettingsScreenItem);
+        bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.EntryScreenItem:
+                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.HomeScreenItem:
+                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.HelpScreenItem:
+                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.SettingsScreenItem:
+                        return true;
+
+                }
+                return false;
+            }
+        });
     }
 
 }

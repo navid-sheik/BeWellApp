@@ -7,6 +7,14 @@
     tools:context=".activity.EntryScreenActivity"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +26,8 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:scrollbars="none"
+
             android:fillViewport="true"
 
             >
@@ -67,6 +76,7 @@
             card_view:cardElevation="5dp"
             card_view:cardCornerRadius="4dp"
             card_view:cardUseCompatPadding="true"
+            android:id="@+id/cardViewExercise"
             >
 
             <LinearLayout
@@ -157,11 +167,241 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".activity.EntryScreenActivity"
+            android:padding="10dp"
+            android:layout_marginBottom="200dp"
+            android:elevation="10dp"
+            card_view:cardElevation="5dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardUseCompatPadding="true"
+            android:id="@+id/cardViewMood"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/parentViewMood"
+                android:orientation="vertical"
+                android:background="@color/appGrey"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/topTitleMood"
+                    android:padding="4dp"
+                    android:weightSum="2"
+                    android:background="@drawable/borderbottom"
+
+                    >
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Mood"
+                        android:textSize="30dp"
+                        android:textColor="@color/black"
+                        android:layout_weight="1.8"
+                        />
+
+                    <Button
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_width="50dp"
+                        android:layout_height= "50dp"
+                        android:layout_weight="0.2"
+                        android:drawableTop="@drawable/ic_add"
+                        android:id="@+id/addNewMood"
+
+                        />
+
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:elevation="10dp"
+                    card_view:cardElevation="5dp"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardUseCompatPadding="true"
+                    android:id="@+id/cardViewMoodQuestion"
+                    >
+
+
+                <GridLayout
+                    android:id="@+id/emojiiContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:columnCount="3"
+                    android:rowCount="2"
+                    >
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fantastic"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button100Value"
+
+
+
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Happy"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button80Value"
+
+
+
+                        />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="okay"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button60Value"
+
+
+
+                        />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stressed"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button40Value"
+
+
+
+                        />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sad"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button20Value"
+
+
+
+                        />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Angry"
+                        android:backgroundTint="@color/greyButton"
+                        android:layout_margin="5sp"
+                        android:gravity="fill"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:textColor="@color/black"
+                        android:id="@+id/button0Value"
+
+
+
+                        />
+
+
+                </GridLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/moodRecycleView"
+                    android:background="@drawable/borderbottom"
+                    android:layout_marginTop="10dp"
+
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/bottomMoodStatus"
+                    android:padding="4dp"
+                    android:weightSum="2"
+                    >
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Status"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:id="@+id/moodStatus"
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="75% "
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:id="@+id/moodStatusValue"
+                        />
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
 
 
 
     </LinearLayout>
+    </ScrollView>
 
     <!--    Must Be kept for bottom navigation bar | use relative layout or other to align to the bottom-->
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -400,7 +400,7 @@ public class ExerciseEntry extends AppCompatActivity {
         Intent mainActivity = new Intent();
         mainActivity.putExtra(PutExtra.UPDATE_EXCERCISE, exerciseToModify);
         mainActivity.putExtra(PutExtra.POSITION_OF_FITNESS_ENTRY, position);
-        setResult(ResultCode.UPDATE_RECORD, mainActivity);
+        setResult(ResultCode.UPDATE_FITNESS_RECORD, mainActivity);
         finish();
     }
 
@@ -412,7 +412,7 @@ public class ExerciseEntry extends AppCompatActivity {
         Intent mainActivity = new Intent();
         mainActivity.putExtra(PutExtra.DELETE_EXERCISE, exerciseToDelete);
         mainActivity.putExtra(PutExtra.POSITION_OF_FITNESS_ENTRY, position);
-        setResult(ResultCode.DELETE_RECORD, mainActivity);
+        setResult(ResultCode.DELETE_FITNESS_RECORD, mainActivity);
         finish();
 
 
