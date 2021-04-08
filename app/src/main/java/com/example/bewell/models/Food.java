@@ -9,14 +9,17 @@ public class Food implements Parcelable {
     private int protein;
     private int carbs;
     private int fats;
+    private TypeFood typeFood;
 
-    public Food(String name, int calories, int protein, int carbs, int fats) {
+    public Food(String name, int calories, int protein, int carbs, int fats,  TypeFood type) {
         this.name = name;
         this.calories = calories;
         this.protein = protein;
         this.carbs = carbs;
         this.fats = fats;
+        this.typeFood = type;
     }
+
 
     protected Food(Parcel in) {
         name = in.readString();
@@ -24,6 +27,7 @@ public class Food implements Parcelable {
         protein = in.readInt();
         carbs = in.readInt();
         fats = in.readInt();
+        typeFood = TypeFood.valueOf(in.readString());
     }
 
     public static final Creator<Food> CREATOR = new Creator<Food>() {
@@ -78,6 +82,14 @@ public class Food implements Parcelable {
         this.fats = fats;
     }
 
+    public TypeFood getTypeFood() {
+        return typeFood;
+    }
+
+    public void setTypeFood(TypeFood typeFood) {
+        this.typeFood = typeFood;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -90,5 +102,6 @@ public class Food implements Parcelable {
         dest.writeInt(protein);
         dest.writeInt(carbs);
         dest.writeInt(fats);
+        dest.writeString(this.typeFood.name());
     }
 }
