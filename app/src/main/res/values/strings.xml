@@ -14,4 +14,5 @@
     <string name="notifications">Push Notifications</string>
     <string name="logout">LOG OUT</string>
     <string name="update">UPDATE</string>
+    <string name="title_activity_display_ambassador">DisplayAmbassadorActivity</string>
 </resources>

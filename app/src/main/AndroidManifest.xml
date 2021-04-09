@@ -13,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeWell">
-        <activity android:name=".activity.MessagesScreenActivity">
 
-        </activity>
+
+
+
+        <activity android:name=".activity.MessagesScreenActivity"></activity>
         <activity android:name=".activity.ConversationsScreenActivity" />
         <activity android:name=".activity.SettingsScreenActivity" />
         <activity android:name=".activity.PreRegistrationActivity" />
@@ -25,23 +27,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
         </activity>
         <activity android:name=".activity.RegistrationScreenActivity" />
         <activity android:name=".activity.HelpScreenActivity" />
-        <activity android:name=".activity.HomeScreenActivity">
-
-        </activity>
+        <activity android:name=".activity.HomeScreenActivity"></activity>
         <activity
             android:name=".entryScreens.AddFood"
             android:label="@string/title_activity_add_food" />
         <activity android:name=".entryScreens.ExerciseEntry" />
-        <activity android:name=".activity.EntryScreenActivity" >
-
-
-        </activity>
+        <activity android:name=".activity.EntryScreenActivity"></activity>
     </application>
 
 </manifest>
