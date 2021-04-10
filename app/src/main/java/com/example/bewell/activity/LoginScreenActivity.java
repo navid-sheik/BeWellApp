@@ -98,6 +98,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                     });
                     Intent intent = new Intent(LoginScreenActivity.this, HomeScreenActivity.class);
                     intent.putExtra("userInfo",user);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.

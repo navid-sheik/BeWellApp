@@ -118,6 +118,7 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
                                         if (task.isSuccessful()){
                                             Toast.makeText(RegistrationScreenActivity.this,"User data has been  registered correctly", Toast.LENGTH_SHORT);
                                             Intent intent  =  new Intent(RegistrationScreenActivity.this, HomeScreenActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                         }else{
                                             Log.v("Database", "Something went wrong during database  ");

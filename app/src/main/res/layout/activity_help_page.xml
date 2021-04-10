@@ -5,8 +5,255 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.HelpScreenActivity"
-    android:background="@color/yellow"
+    android:orientation="vertical"
     >
+
+
+    <LinearLayout
+        android:id="@+id/navigationHelpPage"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:padding="5dp">
+
+
+
+
+        <Button
+            android:backgroundTint="@color/greyButton"
+            android:layout_width="0dp"
+            android:layout_height= "50dp"
+            android:layout_weight="0.1"
+            android:drawableTop="@drawable/ic_baseline_exit"
+            android:id="@+id/ambassadorListBtn"
+
+
+
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:text="Be Well"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:lines="1"
+            android:textSize="30sp"
+
+
+            />
+
+
+
+        <Button
+            android:backgroundTint="@color/greyButton"
+            android:layout_width="0dp"
+            android:layout_height= "50dp"
+            android:layout_weight="0.1"
+            android:drawableTop="@drawable/ic_baseline_message"
+            android:id="@+id/conversationBtn"
+
+
+            />
+
+
+    </LinearLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navigationHelpPage"
+        >
+
+
+    <RelativeLayout
+        android:id="@+id/reportContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/buttonReportContainer"
+            android:layout_marginTop="20dp"
+            android:weightSum="2"
+
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="MONTHLY REPORTS"
+                android:id="@+id/mohtlyReports"
+                android:backgroundTint="@color/greyButton"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                app:cornerRadius="5dp"
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CURRENT MONTH"
+                android:id="@+id/currentMonthReport"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/greyButton"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                app:cornerRadius="5dp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/fitnessBlogContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:layout_below="@+id/buttonReportContainer"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fitness Blogs"
+                android:textSize="20dp"
+
+                />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/fitnessBlogRecViews"
+                android:background="@drawable/borderbottom"
+                android:layout_marginTop="10dp"
+
+                />
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/FoodBlogContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/fitnessBlogContainer"
+            >
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Food Blogs"
+                android:textSize="20dp"
+
+                />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/MealRecViews"
+            android:background="@drawable/borderbottom"
+
+
+
+
+            />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/MentalHealthBlogContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/FoodBlogContainer"
+            android:layout_marginBottom="100dp"
+            >
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mental Health Blogs"
+                android:textSize="20dp"
+
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/meantalHealthRecycleView"
+                android:background="@drawable/borderbottom"
+
+
+                />
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

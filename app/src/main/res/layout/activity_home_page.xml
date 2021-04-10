@@ -7,6 +7,18 @@
     tools:context=".activity.HomeScreenActivity"
     android:background="@color/blue">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="not logged in"
+        android:id="@+id/userIdSample"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"
+
+
+        />
+
+
 
     <!--    Must Be kept for bottom navigation bar | use relative layout or other to align to the bottom-->
     <com.google.android.material.bottomnavigation.BottomNavigationView

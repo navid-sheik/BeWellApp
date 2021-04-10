@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SettingsScreenActivity extends AppCompatActivity {
 
-
+    //Added by navid
+    private Button logoOutBtn;
+    ///////
     private TextView name, email, password;
     private TextView surname;
     private DatabaseReference profileUserRef;
@@ -33,6 +36,9 @@ public class SettingsScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
 
+        //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
+        setUpBottomNavigation();
+
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         profileUserRef= FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
@@ -42,6 +48,23 @@ public class SettingsScreenActivity extends AppCompatActivity {
         surname = (TextView) findViewById(R.id.Surname);
         email = (TextView) findViewById(R.id.email);
         password = (TextView) findViewById(R.id.password);
+        //Log out button - added by navid
+        logoOutBtn =  findViewById(R.id.logoutButton);
+        logoOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOutUser();
+            }
+        });
+
+        //////
+
+
+
+
+
+
+
 
         ValueEventListener eventListener = profileUserRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,8 +88,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
-        //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
-        setUpBottomNavigation();
+
+    }
+
+    public void update_profile(View view) {
+
+        Intent intent = new Intent(this, UpdateProfile.class);
+        startActivity(intent);
     }
 
 
@@ -100,9 +128,16 @@ public class SettingsScreenActivity extends AppCompatActivity {
         });
     }
 
-    public void update_profile(View view) {
 
-        Intent intent = new Intent(this, UpdateProfile.class);
+    //added by navid for testng
+
+    private void logOutUser(){
+        mAuth.signOut();
+        Intent intent =  new Intent(SettingsScreenActivity.this, LoginScreenActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
     }
+    ///
+
 }
