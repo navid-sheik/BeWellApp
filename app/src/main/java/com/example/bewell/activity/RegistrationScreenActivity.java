@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,26 +39,138 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
 
     Boolean typeEmployee;
 
+    private int defaultColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page);
         mAuth = FirebaseAuth.getInstance();
-        initiliazeValue();
+        initializeValue();
 
     }
 
-    private  void initiliazeValue(){
+    private void initializeValue(){
         terms = findViewById(R.id.terms);
         employeeID = findViewById(R.id.employeeId);
+        employeeID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                employeeID.setError(null);
+                employeeID.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         nameV= findViewById(R.id.registerName);
+        nameV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nameV.setError(null);
+                nameV.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         surnameV = findViewById(R.id.registerSurname);
+        surnameV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                surnameV.setError(null);
+                surnameV.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         emailV = findViewById(R.id.registerEmail);
+        emailV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailV.setError(null);
+                emailV.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         passwordV = findViewById(R.id.resgisterPassword);
+        passwordV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordV.setError(null);
+                passwordV.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         password2V = findViewById(R.id.registerRepeatPassword);
+        password2V.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                password2V.setError(null);
+                password2V.setTextColor(defaultColor);
+                signUpBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         signUpBtn = findViewById(R.id.signUpButton);
         signUpBtn.setOnClickListener(regiStrationButtonListener);
 
+        ColorStateList colorList = emailV.getTextColors();
+        defaultColor = colorList.getDefaultColor();
     }
 
 
@@ -76,32 +192,11 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
         String email = emailV.getText().toString().trim();
         String password = passwordV.getText().toString().trim();
         String password2 = password2V.getText().toString().trim();
-        typeEmployee = getIntent().getExtras().getBoolean("type");
-        final String Expn =
-                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
-        if(!terms.isChecked()) {
-            Toast.makeText(getApplicationContext(), "You need to accept terms and conditions first", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else if(email.isEmpty() || id.isEmpty() || name.isEmpty() || surname.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please complete the form first", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        else if(!email.matches(Expn)){
-            Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else if(password.length() < 7 || !password.matches(".*\\d.*")){
-            Toast.makeText(getApplicationContext(), "Password must be at least 6 characters long and include a number", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else if (password.equals(password2)){
+        typeEmployee = getIntent().getExtras().getBoolean("type");
+
+
+        if (fieldValidation(id,name,surname,email,password,password2)){
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                 @Override
@@ -133,12 +228,62 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
                 }
             });
         }
-        else {
-            Toast.makeText(RegistrationScreenActivity.this, "Passwords do not match",
-                    Toast.LENGTH_SHORT).show();
-        }
 
     }
+    private boolean fieldValidation(String id,String name,String surname,String email,String password,String password2){
+        setOkView(employeeID);
+        setOkView(nameV);
+        setOkView(surnameV);
+        setOkView(emailV);
+        setOkView(passwordV);
+        setOkView(password2V);
 
 
+        final String Expn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        if(id.isEmpty()) {
+            setErrorView(employeeID,"Id cannot be empty");
+        }
+        else if(name.isEmpty()){
+            setErrorView(nameV,"Name must not be empty");
+        }
+        else if(surname.isEmpty()){
+            setErrorView(surnameV,"Surname must not be empty");
+        }
+        else if(!email.matches(Expn)){
+            setErrorView(emailV,"Enter a valid email");
+            }
+        else if(password.length() < 7 || !password.matches(".*\\d.*")){
+            setErrorView(passwordV,"Password must be at least 7 characters long and contain a number");
+            //return;
+        }
+        else if(!password.equals(password2)){
+            setErrorView(password2V,"Passwords must match");
+        }
+        else if(!terms.isChecked()) {
+            Toast.makeText(getApplicationContext(), "You need to accept terms and conditions first", Toast.LENGTH_SHORT).show();
+            //return;
+        }
+        else{
+            return true;
+        }
+        return false;
+    }
+    private void setOkView(EditText text) {
+        text.setError(null);
+        text.setTextColor(defaultColor);
+        signUpBtn.setEnabled(true);
+    }
+
+    private void setErrorView(EditText text,String message) {
+        text.setError(message);
+        signUpBtn.setEnabled(false);
+        text.setTextColor(Color.RED);
+    }
 }

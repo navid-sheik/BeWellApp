@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -33,6 +37,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     private Button loginBtn;
     private TextView forgotPassTxtView;
     private TextView  goToRegisterTxtView;
+    private int defaultColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,67 @@ public class LoginScreenActivity extends AppCompatActivity {
 
 
     private void initializeValue(){
+        //username textview init
         usernameLogin = findViewById(R.id.loginUsername);
+
+        ColorStateList colorList = usernameLogin.getTextColors();
+        defaultColor = colorList.getDefaultColor();
+
+
+        usernameLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                usernameLogin.setError(null);
+                usernameLogin.setTextColor(defaultColor);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String loginString = usernameLogin.getText().toString();
+                if (loginString.isEmpty()) {
+                    setErrorView(usernameLogin);
+                } else {
+                    setOkView(usernameLogin);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        //password textview init
+
         passwordLogin = findViewById(R.id.loginPassword);
+        passwordLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                passwordLogin.setError(null);
+                passwordLogin.setTextColor(defaultColor);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String passwordString = passwordLogin.getText().toString();
+                if (passwordString.isEmpty()) {
+                    setErrorView(passwordLogin);
+                } else {
+                    setOkView(passwordLogin);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+
+
+
         forgotPassTxtView = findViewById(R.id.forgotPassword);
         forgotPassTxtView.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Function not available yet", Toast.LENGTH_SHORT).show());
         loginBtn = findViewById(R.id.loginBtn);
@@ -60,12 +124,33 @@ public class LoginScreenActivity extends AppCompatActivity {
         });
     }
 
+    private void setOkView(EditText text) {
+        text.setError(null);
+        text.setTextColor(defaultColor);
+        loginBtn.setEnabled(true);
+    }
+
+    private void setErrorView(EditText text) {
+        text.setError("Field cannot be empty");
+        loginBtn.setEnabled(false);
+        text.setTextColor(Color.RED);
+    }
+
     private View.OnClickListener loginPageListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.loginBtn:
-                    loginUser();
+                    if(usernameLogin.getText().toString().isEmpty()){
+                        setErrorView(usernameLogin);
+                    }
+                    else if(passwordLogin.getText().toString().isEmpty()){
+                        setErrorView(passwordLogin);
+                    }
+                    else{
+                        loginUser();
+                    }
+
 
             }
         }
@@ -75,6 +160,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     private void loginUser(){
         String userNameString = usernameLogin.getText().toString().trim();
         String passwordString = passwordLogin.getText().toString().trim();
+
 
         mAuth.signInWithEmailAndPassword(userNameString, passwordString).addOnCompleteListener(LoginScreenActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -113,6 +199,18 @@ public class LoginScreenActivity extends AppCompatActivity {
 
 
 
+    }
+    private void emptyChecker(TextView blank,int length){
+        if(length > 0){
+            blank.setError("Fill in this field");
+            //blank.setEnabled(false);
+            //blank.setTextColor(Color.RED);
+            //blank.getBackground().setAlpha(128);
+
+        }
+        else{
+
+        }
     }
 
     private void goToRegistrationPage(){
