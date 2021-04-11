@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.UpdateProfile"
+    tools:context=".activity.Update_Profile"
     android:orientation="vertical"
     android:gravity="center">
 
 
     <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:hint="@string/name"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:hint="@string/name"
         android:id="@+id/edit_name"
         android:inputType="textPersonName"
         android:layout_marginBottom="50dp"/>
@@ -25,21 +25,21 @@
         android:inputType="textPersonName"
         android:layout_marginBottom="50dp"/>
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:hint="@string/email"
-            android:id="@+id/edit_email"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="50dp"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:hint="@string/email"
+        android:id="@+id/edit_email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="50dp"/>
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:hint="@string/password"
-            android:id="@+id/edit_password"
-            android:inputType="textPassword"
-            android:layout_marginBottom="50dp"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:hint="@string/password"
+        android:id="@+id/edit_password"
+        android:inputType="textPassword"
+        android:layout_marginBottom="50dp"/>
 
     <Button
         android:layout_width="100dp"

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,11 +25,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
     //Added by navid
     private Button logoOutBtn;
     ///////
-    private TextView name, email, password;
-    private TextView surname;
+    private TextView name, email, password, name2;
+    private TextView surname, id_;
     private DatabaseReference profileUserRef;
     private FirebaseAuth mAuth;
     private String currentUserId;
+    private ImageButton updateBtn;
+
 
 
     @Override
@@ -48,6 +51,10 @@ public class SettingsScreenActivity extends AppCompatActivity {
         surname = (TextView) findViewById(R.id.Surname);
         email = (TextView) findViewById(R.id.email);
         password = (TextView) findViewById(R.id.password);
+        id_ = (TextView) findViewById(R.id.ID) ;
+        name2 = (TextView) findViewById(R.id.nameTop);
+
+
         //Log out button - added by navid
         logoOutBtn =  findViewById(R.id.logoutButton);
         logoOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +66,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
         //////
 
-
-
-
-
-
+        updateBtn = findViewById(R.id.updateButton);
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update_profile(v);
+            }
+        });
 
 
         ValueEventListener eventListener = profileUserRef.addValueEventListener(new ValueEventListener() {
@@ -73,12 +82,16 @@ public class SettingsScreenActivity extends AppCompatActivity {
                     String username = snapshot.child("name").getValue().toString();
                     String sur_name = snapshot.child("surname").getValue().toString();
                     String emailID = snapshot.child("email").getValue().toString();
-                    String password_ = snapshot.child("password").getValue().toString();
+                    String userId = snapshot.child("empId").getValue().toString();
+                    String name_top = snapshot.child("name").getValue().toString();
+//                    String password_ = snapshot.child("password").getValue().toString();
 
                     name.setText(username);
                     surname.setText(sur_name);
                     email.setText(emailID);
-                    password.setText(password_);
+                    id_.setText(userId);
+                    name2.setText(name_top);
+//                    password.setText(password_);
                 }
             }
 
@@ -93,7 +106,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
     public void update_profile(View view) {
 
-        Intent intent = new Intent(this, UpdateProfile.class);
+        Intent intent = new Intent(this, Update_Profile.class);
         startActivity(intent);
     }
 
