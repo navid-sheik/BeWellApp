@@ -184,6 +184,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -191,6 +192,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -244,6 +246,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -251,6 +254,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -305,6 +309,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -312,6 +317,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
                                     Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
