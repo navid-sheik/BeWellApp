@@ -4,34 +4,262 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HomeScreenActivity"
-    android:background="@color/blue">
+    android:background="@color/greyMenuUnSelectedItem"
+    tools:context=".activity.HomeScreenActivity">
 
     <TextView
+        android:id="@+id/userIdSample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="not logged in"
-        android:id="@+id/userIdSample"
-        android:background="@color/white"
         android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:text="not logged in"
 
 
         />
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="294dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="418dp"
+        android:text="Your Daily Goal: 1000 kcal" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="199dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="636dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Todays Statistics"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="227dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="472dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Burned Calories" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="436dp"
+        android:text="1000.00 kcal" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="343dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="350dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Gained Calories" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="211dp"
+        android:layout_height="29dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="586dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Total Calories" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="553dp"
+        android:text="1000.00 kcal" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="178dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="535dp"
+        android:text="Your Daily Goal: 2000 kcal" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="69dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="383dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="316dp"
+        android:text="4000.00 kcal" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="414dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="301dp"
+        android:text="Your Daily Goal: 2000 kcal" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="462dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="231dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Step Count" />
+
+    <TextView
+        android:id="@+id/stepCounter"
+        android:layout_width="137dp"
+        android:layout_height="72dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="501dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginBottom="158dp"
+        android:text="10,000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="548dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="164dp"
+        android:text="Steps" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="241dp"
+        android:layout_marginTop="501dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="213dp"
+        android:text="Counter"
+        android:textAlignment="center" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="158dp"
+        android:text="ToggleButton" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="572dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="140dp"
+        android:text="Your Daily Goal: 12000 Steps" />
 
 
     <!--    Must Be kept for bottom navigation bar | use relative layout or other to align to the bottom-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomNavigation"
-        app:itemBackground="@drawable/background_menu"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        android:backgroundTint="@color/gray"
-        app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"
-        />
+        android:backgroundTint="@color/gray"
+        app:itemBackground="@drawable/background_menu"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
 
 
 </RelativeLayout>
