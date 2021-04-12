@@ -22,6 +22,8 @@
 
 
         </activity>
+
+        <activity android:name=".activity.Update_Profile"></activity>
         <activity
             android:name=".activity.AmbassadorsConversationActivity"
             android:theme="@style/Theme.BeWellActionBar">
