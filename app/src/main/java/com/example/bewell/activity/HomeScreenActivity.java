@@ -3,7 +3,11 @@ package com.example.bewell.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,9 +18,18 @@ import com.example.bewell.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeScreenActivity extends AppCompatActivity{
+import android.hardware.SensorManager;
+
+public class HomeScreenActivity extends AppCompatActivity implements SensorEventListener {
+
+    SensorManager sensorManager;
+    TextView stepCounter;
+
     private String uid;
     private TextView randomTextView;
+
+    boolean running = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +40,22 @@ public class HomeScreenActivity extends AppCompatActivity{
         //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
         verifyUserLogIn();
 
+        stepCounter = (TextView) findViewById(R.id.stepCounter);
 
-
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        running = true;
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if(countSensor != null){
+            sensorManager.registerListener(this,countSensor,SensorManager.SENSOR_DELAY_UI);
+        }else{
+            Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //Verify loggegd - DO NOT DELETE
 
@@ -47,6 +72,12 @@ public class HomeScreenActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        running = false;
+        //sensorManager.unregisterListener(this);
+    }
 
     //Set up the bottom navigation
     private void setUpBottomNavigation() {
@@ -76,11 +107,21 @@ public class HomeScreenActivity extends AppCompatActivity{
                 return false;
             }
         });
+
+
     }
 
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(running){
+            stepCounter.setText(String.valueOf(event.values[0]));
+        }
 
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-
+    }
 }
