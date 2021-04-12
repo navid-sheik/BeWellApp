@@ -1,24 +1,36 @@
 package com.example.bewell.activity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bewell.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class SettingsScreenActivity extends AppCompatActivity {
 
@@ -31,7 +43,9 @@ public class SettingsScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUserId;
     private ImageButton updateBtn;
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//    String currentUid = user.getUid();
+    ProgressDialog pd;
 
 
     @Override
@@ -70,7 +84,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update_profile(v);
+                update_profile();
             }
         });
 
@@ -104,10 +118,220 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
     }
 
-    public void update_profile(View view) {
+    public void update_profile() {
 
-        Intent intent = new Intent(this, Update_Profile.class);
-        startActivity(intent);
+        String options [] = {"Edit Name", "Edit Surname", "Edit Email"};
+
+        pd = new ProgressDialog(SettingsScreenActivity.this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsScreenActivity.this);
+
+        builder.setTitle("Choose Options");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which==0){
+                    pd.setMessage("Updating Name");
+                    showNameUpdateDialog("name");
+                }
+                else if (which==1){
+                    pd.setMessage("Updating Surname");
+                    showSurnameUpdateDialog("surname");
+                }
+                else if (which==2){
+                    pd.setMessage("Updating Email");
+                    showEmailUpdateDialog("email");
+
+                }
+
+            }
+        });
+
+        builder.create().show();
+
+//        Intent intent = new Intent(this, Update_Profile.class);
+//        startActivity(intent);
+    }
+
+    private void showEmailUpdateDialog(String key) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsScreenActivity.this);
+        builder.setTitle("Update " + key);
+
+        LinearLayout linearLayout = new LinearLayout(SettingsScreenActivity.this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setPadding(10, 10, 10, 10);
+
+        EditText editText = new EditText(SettingsScreenActivity.this);
+        editText.setHint("Enter "+key);
+        linearLayout.addView(editText);
+
+        builder.setView(linearLayout);
+
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String value = editText.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(value)){
+                    pd.show();
+                    HashMap<String, Object> result = new HashMap<>();
+                    result.put(key, value);
+
+                    profileUserRef.child(currentUserId).updateChildren(result)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                   }
+
+                else{
+                    Toast.makeText(SettingsScreenActivity.this, "Enter "+key, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+
+    }
+
+    private void showSurnameUpdateDialog(String key) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsScreenActivity.this);
+
+        builder.setTitle("Update " + key);
+
+        LinearLayout linearLayout = new LinearLayout(SettingsScreenActivity.this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setPadding(10, 10, 10, 10);
+
+        EditText editText = new EditText(SettingsScreenActivity.this);
+        editText.setHint("Enter "+key);
+        linearLayout.addView(editText);
+
+        builder.setView(linearLayout);
+
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String value = editText.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(value)){
+                    pd.show();
+                    HashMap<String, Object> result = new HashMap<>();
+                    result.put(key, value);
+
+                    profileUserRef.child(currentUserId).updateChildren(result)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
+                else{
+                    Toast.makeText(SettingsScreenActivity.this, "Enter "+key, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+
+    }
+
+
+    private void showNameUpdateDialog(String key) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsScreenActivity.this);
+
+        builder.setTitle("Update " + key);
+
+        LinearLayout linearLayout = new LinearLayout(SettingsScreenActivity.this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setPadding(10, 10, 10, 10);
+
+        EditText editText = new EditText(SettingsScreenActivity.this);
+        editText.setHint("Enter "+key);
+        linearLayout.addView(editText);
+
+        builder.setView(linearLayout);
+
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String value = editText.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(value)){
+                    pd.show();
+                    HashMap<String, Object> result = new HashMap<>();
+                    result.put(key, value);
+
+                    profileUserRef.child(currentUserId).updateChildren(result)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SettingsScreenActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
+                else{
+                    Toast.makeText(SettingsScreenActivity.this, "Enter "+key, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
     }
 
 
