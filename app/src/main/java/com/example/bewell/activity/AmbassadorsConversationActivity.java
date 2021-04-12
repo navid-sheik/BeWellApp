@@ -1,5 +1,6 @@
 package com.example.bewell.activity;
 
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,19 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 import com.example.bewell.R;
 import com.example.bewell.adapters.AmbassadorRecViewAdapter;
-import com.example.bewell.adapters.FoodRecViewAdapter;
-import com.example.bewell.models.TypeFood;
 import com.example.bewell.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.xwray.groupie.Item;
 
 import java.util.ArrayList;
 
@@ -30,13 +29,15 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
     private ArrayList<User>  amabassadorsFromServer = new ArrayList<>();
 
     FirebaseDatabase databaseRef;
+    FirebaseUser currentUserLogged;
+    User currentUserData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dsiplay_ambassadors_conversation_page);
         getSupportActionBar().setTitle("Select Ambassador");
+        currentUser();
         initializeViews();
-
         fetchUsers ();
     }
 
@@ -48,10 +49,11 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
 
         ambassadorRecView = findViewById(R.id.allAmbassadorRecView);
         amabassadorAdapter =  new AmbassadorRecViewAdapter(this);
-        amabassadorsFromServer.add(new User("name", "babd", "dd", "dsds",false));
-        amabassadorsFromServer.add(new User("name2", "babd", "dd", "dsds",false));
-        amabassadorsFromServer.add(new User("name3", "babd", "dd", "dsds",false));
-        amabassadorsFromServer.add(new User("name4", "babd", "dd", "dsds",false));
+//        amabassadorsFromServer.add(new User("dcdcd", "name", "babd", "dd", "dsds",false));
+//        amabassadorsFromServer.add(new User("sddsjfhdj","name2", "babd", "dd", "dsds",false));
+//        amabassadorsFromServer.add(new User("jdbjsabas", "name3", "babd", "dd", "dsds",false));
+//        amabassadorsFromServer.add(new User("djhskjdhs", "name4", "babd", "dd", "dsds",false));
+
         amabassadorAdapter.setAmbassadors(amabassadorsFromServer);
 
 
@@ -61,6 +63,34 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
 
 
     }
+
+    private void currentUser(){
+
+            currentUserLogged = FirebaseAuth.getInstance().getCurrentUser();
+            String uid  = currentUserLogged.getUid();
+            String path   = "Users/" + uid;
+
+            DatabaseReference ref =  FirebaseDatabase.getInstance().getReference(path);
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String userId  = (String) snapshot.child("userId").getValue().toString();
+                    String empId =  (String) snapshot.child("empId").getValue().toString();
+                    String name =  (String) snapshot.child("name").getValue().toString();
+                    String surname =  (String) snapshot.child("surname").getValue().toString();
+                    String email =  (String) snapshot.child("email").getValue().toString();
+                    boolean type =  (boolean) snapshot.child("employeeType").getValue();
+                    User  currentUserFromServ = new User(userId,empId,name,  surname, email, type);
+                    currentUserData =  currentUserFromServ;
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
 
 
     private void fetchUsers (){
@@ -72,12 +102,24 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
                 //Called when retrive the eliite
                 for (DataSnapshot messageSnapshot : snapshot.getChildren()){
                     Log.i("NewMessage",messageSnapshot.getValue().toString());
+                    String userId  = (String) messageSnapshot.child("userId").getValue().toString();
 
                     String empId =  (String) messageSnapshot.child("empId").getValue().toString();
                     String name =  (String) messageSnapshot.child("name").getValue().toString();
+                    String surname =  (String) messageSnapshot.child("surname").getValue().toString();
+                    String email =  (String) messageSnapshot.child("email").getValue().toString();
+                    boolean type =  (boolean) messageSnapshot.child("employeeType").getValue();
 
-                    User  user = new User(empId,name,  "fdfd", "dss", false);
-                    amabassadorsFromServer.add(user);
+
+
+                    User  user = new User(userId,empId,name,  surname, email, type);
+                    if (currentUserData.isEmployeeType() & !type){
+                        amabassadorsFromServer.add(user);
+                    }else if (!currentUserData.isEmployeeType() & type){
+                        amabassadorsFromServer.add(user);
+                    }
+//                    amabassadorsFromServer.add(user);
+
                 }
                 amabassadorAdapter.setAmbassadors(amabassadorsFromServer);
             }
@@ -97,9 +139,11 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
     public void onAmbassadorClick(int position) {
 
         Intent intent  =  new Intent( AmbassadorsConversationActivity.this, MessagesScreenActivity.class);
+        intent.putExtra("userToMessage", amabassadorsFromServer.get(position) );
         startActivity(intent);
 
 
 
     }
+
 }

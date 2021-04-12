@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class  RegistrationScreenActivity extends AppCompatActivity {
@@ -203,8 +204,12 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.v("SucesssAuth",  "Success");
                     if (task.isSuccessful()){
-                        User user  = new User(id,name,surname,email,typeEmployee);
                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        User user  = new User(userId,id,name,surname,email,typeEmployee);
+
+                        DatabaseReference refEmployee   =  FirebaseDatabase.getInstance().getReference("Users");
+                        DatabaseReference refAmabassador  =  FirebaseDatabase.getInstance().getReference("Ambassdor ");
+
                         FirebaseDatabase.getInstance().getReference("Users").child(userId).setValue(user)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -212,7 +217,8 @@ public class  RegistrationScreenActivity extends AppCompatActivity {
 
                                         if (task.isSuccessful()){
                                             Toast.makeText(RegistrationScreenActivity.this,"User data has been  registered correctly", Toast.LENGTH_SHORT);
-                                            Intent intent  =  new Intent(RegistrationScreenActivity.this, HomeScreenActivity.class);
+                                            Intent intent  =  new Intent(RegistrationScreenActivity.this, SplashScreen.class);
+                                            intent.putExtra("type", typeEmployee);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                         }else{

@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MessagesScreenActivity"
-    android:background="@color/greyButton"
+    android:background="@color/white"
     >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageChatLogRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
         />
 
 
@@ -41,7 +42,9 @@
             android:layout_height="match_parent"
             android:text="SEND"
             android:layout_weight="0.3"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            />
 
 
 

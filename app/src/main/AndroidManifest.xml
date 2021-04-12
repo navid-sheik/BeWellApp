@@ -13,45 +13,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeWell">
-        <activity android:name=".activity.AmbassadorsConversationActivity"
-            android:theme="@style/Theme.BeWellActionBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ConversationsScreenActivity"/>
-
-            <meta-data android:name="android.max_aspect"  android:value="2.1"/>
-
-
-        </activity>
-        <activity android:name=".activity.MessagesScreenActivity"
-            android:theme="@style/Theme.BeWellActionBar"
-
-            >
-
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ConversationsScreenActivity"/>
-
-
-        </activity>
-        <activity android:name=".activity.ConversationsScreenActivity"
-
-            android:theme="@style/Theme.BeWellActionBar"
-            >
-            <meta-data android:name="android.max_aspect"  android:value="2.1"/>
-
-        </activity>
-        <activity android:name=".activity.SettingsScreenActivity" />
-        <activity android:name=".activity.PreRegistrationActivity" />
-        <activity android:name=".activity.LoginScreenActivity">
-        </activity>
-        <activity android:name=".activity.RegistrationScreenActivity" />
-        <activity android:name=".activity.HelpScreenActivity" />
-        <activity android:name=".activity.HomeScreenActivity" >
-
+        <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+        </activity>
+        <activity
+            android:name=".activity.AmbassadorsConversationActivity"
+            android:theme="@style/Theme.BeWellActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ConversationsScreenActivity" />
+            <meta-data
+                android:name="android.max_aspect"
+                android:value="2.1" />
+        </activity>
+        <activity
+            android:name=".activity.MessagesScreenActivity"
+            android:theme="@style/Theme.BeWellActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ConversationsScreenActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ConversationsScreenActivity"
+            android:theme="@style/Theme.BeWellActionBar">
+            <meta-data
+                android:name="android.max_aspect"
+                android:value="2.1" />
+        </activity>
+        <activity android:name=".activity.SettingsScreenActivity" />
+        <activity android:name=".activity.PreRegistrationActivity" />
+        <activity android:name=".activity.LoginScreenActivity"></activity>
+        <activity android:name=".activity.RegistrationScreenActivity" />
+        <activity android:name=".activity.HelpScreenActivity" />
+        <activity android:name=".activity.HomeScreenActivity">
+
         </activity>
         <activity
             android:name=".entryScreens.AddFood"

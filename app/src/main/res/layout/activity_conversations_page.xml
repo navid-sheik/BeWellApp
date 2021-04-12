@@ -16,6 +16,21 @@
 
 
 
+    <!--    Must Be kept for bottom navigation bar | use relative layout or other to align to the bottom-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigation"
+        app:itemBackground="@drawable/background_menu"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        android:backgroundTint="@color/gray"
+        app:menu="@menu/menu_navigation"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        />
+
+
 
 
 </RelativeLayout>

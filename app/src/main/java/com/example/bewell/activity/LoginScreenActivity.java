@@ -27,7 +27,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreenActivity extends AppCompatActivity {
 
@@ -38,12 +41,15 @@ public class LoginScreenActivity extends AppCompatActivity {
     private TextView forgotPassTxtView;
     private TextView  goToRegisterTxtView;
     private int defaultColor;
+    boolean isAmbassador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         mAuth = FirebaseAuth.getInstance();
+        //Cheeck if it's an mabassdor / default it's will retrive the type when logged
+
         initializeValue();
 
     }
@@ -171,21 +177,27 @@ public class LoginScreenActivity extends AppCompatActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
                     //get object for user
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    String path =  "/Users/" +   userId;
+                    DatabaseReference  ref  =  FirebaseDatabase.getInstance().getReference(path);
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (!task.isSuccessful()) {
-                                Log.e("firebase", "Error getting data", task.getException());
-                            }
-                            else {
-                                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                            }
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            isAmbassador =  (boolean) snapshot.child("employeeType").getValue();
+                            Intent intent = new Intent(LoginScreenActivity.this, SplashScreen.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
-                    Intent intent = new Intent(LoginScreenActivity.this, HomeScreenActivity.class);
-                    intent.putExtra("userInfo",user);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+
+
+
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("auth", "signInWithEmail:failure", task.getException());

@@ -1,4 +1,4 @@
-package com.example.bewell.activity;
+ package com.example.bewell.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

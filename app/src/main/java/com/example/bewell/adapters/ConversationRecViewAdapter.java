@@ -10,14 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bewell.R;
+import com.example.bewell.models.Message;
 import com.example.bewell.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ConversationRecViewAdapter extends  RecyclerView.Adapter<ConversationRecViewAdapter.ViewHolder>{
 
-    private ArrayList<User> conversations = new ArrayList<>();
+    private ArrayList<Message> latestMessages = new ArrayList<>();
     private ConversationRecViewAdapter.OnConversationLister onConversationLister;
+    private User otherUser;
 
     public ConversationRecViewAdapter() {
     }
@@ -26,14 +34,8 @@ public class ConversationRecViewAdapter extends  RecyclerView.Adapter<Conversati
         this.onConversationLister = onConversationLister;
     }
 
-    public ArrayList<User> getConversations() {
-        return conversations;
-    }
 
-    public void setAmbassadorContacts(ArrayList<User> conversations) {
-        this.conversations = conversations;
-        notifyDataSetChanged();
-    }
+
 
     @NonNull
     @Override
@@ -45,18 +47,78 @@ public class ConversationRecViewAdapter extends  RecyclerView.Adapter<Conversati
 
     @Override
     public void onBindViewHolder(@NonNull ConversationRecViewAdapter.ViewHolder holder, int position) {
-        User userRowAt  = conversations.get(position);
-        holder.convUsername.setText(userRowAt.getEmpId());
-        holder.latestMessageCov.setText(userRowAt.getName());
+        Message messageRowAt  = latestMessages.get(position);
+        String chatNameReceiver;
+        if(messageRowAt.getFromId() == FirebaseAuth.getInstance().getUid()){
+            chatNameReceiver =  messageRowAt.getToId();
+        }else {
+            chatNameReceiver =  messageRowAt.getFromId();
+        }
+
+
+        String path  =  "/Users/" +  chatNameReceiver;
+        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String userId  = (String) snapshot.child("userId").getValue().toString();
+
+                String empId =  (String) snapshot.child("empId").getValue().toString();
+                String name =  (String) snapshot.child("name").getValue().toString();
+                String surname =  (String) snapshot.child("surname").getValue().toString();
+                String email =  (String) snapshot.child("email").getValue().toString();
+                boolean type =  (boolean) snapshot.child("employeeType").getValue();
+                otherUser = new User(userId,empId,name,  surname, email, type);
+                String fullName =  otherUser.getName() +  " " +  otherUser.getSurname();
+                holder.convUsername.setText(fullName);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        holder.latestMessageCov.setText(messageRowAt.getTextMessage());
 
     }
 
     @Override
     public int getItemCount() {
-        return conversations.size();
+        return latestMessages.size();
 
     }
 
+    public ArrayList<Message> getLatestMessages() {
+        return latestMessages;
+    }
+
+    public void setLatestMessages(ArrayList<Message> latestMessages) {
+        this.latestMessages = latestMessages;
+        notifyDataSetChanged();
+    }
+
+    public void add (Message message){
+        this.latestMessages.add(message);
+        notifyDataSetChanged();
+    }
+
+    public OnConversationLister getOnConversationLister() {
+        return onConversationLister;
+    }
+
+    public void setOnConversationLister(OnConversationLister onConversationLister) {
+        this.onConversationLister = onConversationLister;
+    }
+
+    public User getOtherUser() {
+        return otherUser;
+    }
+
+    public void setOtherUser(User otherUser) {
+        this.otherUser = otherUser;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView convUsername;

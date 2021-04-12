@@ -30,11 +30,18 @@ public class SettingsScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUserId;
 
+    private boolean isAmbassador;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
+        Intent intent = getIntent();
+        isAmbassador =  intent.getBooleanExtra("type", false);
+
 
         //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
         setUpBottomNavigation();
@@ -73,12 +80,12 @@ public class SettingsScreenActivity extends AppCompatActivity {
                     String username = snapshot.child("name").getValue().toString();
                     String sur_name = snapshot.child("surname").getValue().toString();
                     String emailID = snapshot.child("email").getValue().toString();
-                    String password_ = snapshot.child("password").getValue().toString();
+                    //String password_ = snapshot.child("password").getValue().toString();
 
                     name.setText(username);
                     surname.setText(sur_name);
                     email.setText(emailID);
-                    password.setText(password_);
+                    //password.setText(password_);
                 }
             }
 
@@ -101,6 +108,17 @@ public class SettingsScreenActivity extends AppCompatActivity {
     //Set up the bottom navigation
     private void setUpBottomNavigation() {
         BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
+        bottomNavigationView1.setVisibility(View.VISIBLE);
+        if (isAmbassador){
+            bottomNavigationView1.getMenu().clear();
+            bottomNavigationView1.inflateMenu(R.menu.menu_ambassador);
+
+
+        }else {
+            bottomNavigationView1.getMenu().clear();
+            bottomNavigationView1.inflateMenu(R.menu.menu_navigation);
+
+        }
         bottomNavigationView1.setSelectedItemId(R.id.SettingsScreenItem);
         bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -122,10 +140,19 @@ public class SettingsScreenActivity extends AppCompatActivity {
                     case R.id.SettingsScreenItem:
                         return true;
 
+                    case R.id.ConversationAmbassadorScreen:
+                        Intent intent =  new Intent(getApplicationContext(), ConversationsScreenActivity.class);
+                        intent.putExtra("type", isAmbassador);
+                        startActivity(intent);
+
+                        overridePendingTransition(0, 0);
+                        return true;
+
                 }
                 return false;
             }
         });
+
     }
 
 

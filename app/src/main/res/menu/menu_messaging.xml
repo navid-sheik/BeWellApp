@@ -6,6 +6,11 @@
         android:icon="@drawable/ic_add_perso"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/logoutForAmbassador"
+        android:title="Log out"
+        android:icon="@drawable/ic_baseline_exit"
+        app:showAsAction="always"/>
+
 
 
 </menu>

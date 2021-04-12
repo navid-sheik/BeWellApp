@@ -40,7 +40,8 @@ public class AmbassadorRecViewAdapter extends RecyclerView.Adapter<AmbassadorRec
     @Override
     public void onBindViewHolder(@NonNull AmbassadorRecViewAdapter.ViewHolder holder, int position) {
         User userRowAt  = ambassadors.get(position);
-        holder.usernamAMbassador.setText(userRowAt.getEmpId());
+        String displayName =  userRowAt.getName() + " " +  userRowAt.getSurname();
+        holder.usernamAMbassador.setText(displayName);
 
     }
 
