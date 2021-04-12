@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import android.hardware.SensorManager;
 
 public class HomeScreenActivity extends AppCompatActivity implements SensorEventListener {
-
+    //
     SensorManager sensorManager;
     TextView stepCounter;
 
