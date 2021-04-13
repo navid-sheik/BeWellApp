@@ -13,6 +13,7 @@ import com.example.bewell.R;
 import com.example.bewell.models.Message;
 import com.example.bewell.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,7 +50,8 @@ public class ConversationRecViewAdapter extends  RecyclerView.Adapter<Conversati
     public void onBindViewHolder(@NonNull ConversationRecViewAdapter.ViewHolder holder, int position) {
         Message messageRowAt  = latestMessages.get(position);
         String chatNameReceiver;
-        if(messageRowAt.getFromId() == FirebaseAuth.getInstance().getUid()){
+        String id  =  FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(messageRowAt.getFromId().equals(id)){
             chatNameReceiver =  messageRowAt.getToId();
         }else {
             chatNameReceiver =  messageRowAt.getFromId();

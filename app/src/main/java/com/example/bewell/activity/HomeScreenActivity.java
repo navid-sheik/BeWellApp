@@ -32,99 +32,90 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
     SensorManager sensorManager;
     TextView stepCounter;
 
-    private String uid;
-    private TextView randomTextView;
+    private TextView welcomeMessage;
+    private TextView totalCaloriesDay;
+    private TextView suggestiveTotalCalories;
+    private TextView totalCalorieBurnedDay;
+    private TextView suggestiVeCaloriesBurnedDay;
+
 
     boolean running = false;
 
     private boolean isAmbassador;
-    private FirebaseUser currentUserLogged;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Intent intent = getIntent();
         isAmbassador =  intent.getBooleanExtra("type", false);
-
-        randomTextView  =  findViewById(R.id.userIdSample);
-        uid = FirebaseAuth.getInstance().getUid();
-        randomTextView.setText(uid);
-        //verifyUserLogIn();
-
         //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
-
         setUpBottomNavigation();
+        initilizeValueForStepCounter();
+        initilizeViews();
+        getUserDataLoggedIn();
 
-        //DO NOT DELETE CALL AND DEFINITION OF THIS METHOD - USED FOR NAVIGATION BOTTOM
-
-
-        stepCounter = (TextView) findViewById(R.id.stepCounter);
-
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        running = true;
-        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if(countSensor != null){
-            sensorManager.registerListener(this,countSensor,SensorManager.SENSOR_DELAY_UI);
-        }else{
-            Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
-    //Verify loggegd - DO NOT DELETE
 
-//    private void verifyUserLogIn (){
-//
-//
-//        if (uid == null){
-//            Intent intent =  new Intent(HomeScreenActivity.this, LoginScreenActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(intent);
-//        }
-////        getUserDataLoggedIn();
-//
-//        Toast.makeText(HomeScreenActivity.this, "Uid is" + uid, Toast.LENGTH_LONG);
-//
-//    }
 
-//    private void getUserDataLoggedIn(){
-//        currentUserLogged = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid  = currentUserLogged.getUid();
-//        String path   = "Users/" + uid;
-//
-//        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference(path);
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                String userId  = (String) snapshot.child("userId").getValue().toString();
-////                String empId =  (String) snapshot.child("empId").getValue().toString();
-////                String name =  (String) snapshot.child("name").getValue().toString();
-////                String surname =  (String) snapshot.child("surname").getValue().toString();
-////                String email =  (String) snapshot.child("email").getValue().toString();
-//                boolean type =  (boolean) snapshot.child("employeeType").getValue();
-////                User currentUserFromServ = new User(userId,empId,name,  surname, email, type);
-//                isAmbassador =  type;
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        running = false;
-        //sensorManager.unregisterListener(this);
+
+    private void getUserDataLoggedIn(){
+        FirebaseUser currentUserLogged = FirebaseAuth.getInstance().getCurrentUser();
+        String uid  = currentUserLogged.getUid();
+        String path   = "Users/" + uid;
+
+        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String userId  = (String) snapshot.child("userId").getValue().toString();
+                String empId =  (String) snapshot.child("empId").getValue().toString();
+                String name =  (String) snapshot.child("name").getValue().toString();
+                String surname =  (String) snapshot.child("surname").getValue().toString();
+                String email =  (String) snapshot.child("email").getValue().toString();
+                boolean type =  (boolean) snapshot.child("employeeType").getValue();
+
+                String totalCaloriesString =  (String) snapshot.child("totalCalories").getValue().toString();
+                String caloriesBurnedString =  (String) snapshot.child("totalCaloriesBurned").getValue().toString();
+                String wieghtString =  (String) snapshot.child("weight").getValue().toString();
+                String heightString =  (String) snapshot.child("height").getValue().toString();
+//                User currentUserFromServ = new User(userId,empId,name,  surname, email, type);
+                isAmbassador =  type;
+
+                welcomeMessage.setText("Welcome back, " +  name );
+                totalCaloriesDay.setText(totalCaloriesString);
+                totalCalorieBurnedDay.setText(caloriesBurnedString);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
+
+
+    private void initilizeViews(){
+        welcomeMessage =  findViewById(R.id.userWelome);
+        totalCaloriesDay =  findViewById(R.id.totalCaloriesOFDay);
+        suggestiveTotalCalories =  findViewById(R.id.suggestiveCaloriesIntake);
+        totalCalorieBurnedDay =  findViewById(R.id.totalCaloriesBurnedOFDay);
+        suggestiVeCaloriesBurnedDay = findViewById(R.id.suggestiveCaloriesBurnedIntake);
+
+
+    }
+
+
 
     //Set up the bottom navigation
     private void setUpBottomNavigation() {
@@ -138,7 +129,6 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
 //            bottomNavigationView1.inflateMenu(R.menu.menu_navigation);
 //
 //        }
-
         bottomNavigationView1.setSelectedItemId(R.id.HomeScreenItem);
         bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -174,6 +164,19 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
     }
 
 
+
+
+
+
+    //GPS TRACKING
+
+    private void initilizeValueForStepCounter (){
+        stepCounter = (TextView) findViewById(R.id.stepCounter);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+    }
+
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(running){
@@ -186,6 +189,27 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        running = true;
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if(countSensor != null){
+            sensorManager.registerListener(this,countSensor,SensorManager.SENSOR_DELAY_UI);
+        }else{
+            //Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        running = false;
+        //sensorManager.unregisterListener(this);
     }
 
 }

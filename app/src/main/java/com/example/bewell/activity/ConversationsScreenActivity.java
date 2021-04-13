@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,10 @@ public class ConversationsScreenActivity extends AppCompatActivity implements Co
     private boolean isAmbassador;
     FirebaseAuth mAuth;
 
+    private String uid;
+    private FirebaseUser currentUserLogged;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,13 @@ public class ConversationsScreenActivity extends AppCompatActivity implements Co
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
         isAmbassador =  intent.getBooleanExtra("type", false);
-        setUpBottomNavigation();
+        //setUpBottomNavigation();
         initializeViews();
         listenForConversation();
 
     }
+
+
 
 
 
@@ -153,6 +160,8 @@ public class ConversationsScreenActivity extends AppCompatActivity implements Co
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -163,11 +172,52 @@ public class ConversationsScreenActivity extends AppCompatActivity implements Co
             case R.id.logoutForAmbassador:
                 logoutUser();
                 break;
+
+
+            case R.id.menu_goProfile:
+                goToSettingPreData();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void goToSettingPreData(){
+        currentUserLogged = FirebaseAuth.getInstance().getCurrentUser();
+        String uid  = currentUserLogged.getUid();
+        String path   = "Users/" + uid;
+
+        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String userId  = (String) snapshot.child("userId").getValue().toString();
+//                String empId =  (String) snapshot.child("empId").getValue().toString();
+//                String name =  (String) snapshot.child("name").getValue().toString();
+//                String surname =  (String) snapshot.child("surname").getValue().toString();
+//                String email =  (String) snapshot.child("email").getValue().toString();
+                boolean type =  (boolean) snapshot.child("employeeType").getValue();
+//                User currentUserFromServ = new User(userId,empId,name,  surname, email, type);
+                isAmbassador =  type;
+                goToSettingPage(isAmbassador);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void goToSettingPage(boolean isAmb){
+
+        Intent intent =  new Intent(ConversationsScreenActivity.this, SettingsScreenActivity.class);
+        intent.putExtra("type", isAmbassador);
+        startActivity(intent);
+    }
 
     private  void logoutUser(){
         mAuth.signOut();
@@ -196,58 +246,58 @@ public class ConversationsScreenActivity extends AppCompatActivity implements Co
     }
 
 
-    //Set up the bottom navigation
-    private void setUpBottomNavigation() {
-        BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
-        if (isAmbassador){
-            bottomNavigationView1.setVisibility(View.VISIBLE);
-            bottomNavigationView1.getMenu().clear();
-            bottomNavigationView1.inflateMenu(R.menu.menu_ambassador);
-            bottomNavigationView1.setBackgroundColor(bottomNavigationView1.getItemBackground().getAlpha());
-//            bottomNavigationView1.setItemTextColor(ColorStateList.valueOf(R.drawable.selector));
-//            bottomNavigationView1.setItemIconTintList(ColorStateList.valueOf(R.drawable.selector));
-//            bottomNavigationView1.setItemIconTintList(ColorStateList.valueOf(R.color.gray));
-            // TODO WHEN
-
-        }else {
-            bottomNavigationView1.getMenu().clear();
-            bottomNavigationView1.setVisibility(View.INVISIBLE);
-
-
-        }
-        bottomNavigationView1.setSelectedItemId(R.id.ConversationAmbassadorScreen);
-        bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.EntryScreenItem:
-                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.HomeScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.HelpScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.SettingsScreenItem:
-                        Intent intent =  new Intent(getApplicationContext(), SettingsScreenActivity.class);
-                        intent.putExtra("type", isAmbassador);
-                        startActivity(intent);
-
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.ConversationAmbassadorScreen:
-
-                        return true;
-
-                }
-                return false;
-            }
-        });
-    }
+//    //Set up the bottom navigation
+//    private void setUpBottomNavigation() {
+//        BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
+//        if (isAmbassador){
+//            bottomNavigationView1.setVisibility(View.VISIBLE);
+//            bottomNavigationView1.getMenu().clear();
+//            bottomNavigationView1.inflateMenu(R.menu.menu_ambassador);
+//            bottomNavigationView1.setBackgroundColor(bottomNavigationView1.getItemBackground().getAlpha());
+////            bottomNavigationView1.setItemTextColor(ColorStateList.valueOf(R.drawable.selector));
+////            bottomNavigationView1.setItemIconTintList(ColorStateList.valueOf(R.drawable.selector));
+////            bottomNavigationView1.setItemIconTintList(ColorStateList.valueOf(R.color.gray));
+//            // TODO WHEN
+//
+//        }else {
+//            bottomNavigationView1.getMenu().clear();
+//            bottomNavigationView1.setVisibility(View.INVISIBLE);
+//
+//
+//        }
+//        bottomNavigationView1.setSelectedItemId(R.id.ConversationAmbassadorScreen);
+//        bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                switch (item.getItemId()) {
+//                    case R.id.EntryScreenItem:
+//                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.HomeScreenItem:
+//                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.HelpScreenItem:
+//                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.SettingsScreenItem:
+//                        Intent intent =  new Intent(getApplicationContext(), SettingsScreenActivity.class);
+//                        intent.putExtra("type", isAmbassador);
+//                        startActivity(intent);
+//
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.ConversationAmbassadorScreen:
+//
+//                        return true;
+//
+//                }
+//                return false;
+//            }
+//        });
+//    }
 
 }

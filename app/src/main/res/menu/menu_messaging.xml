@@ -6,6 +6,14 @@
         android:icon="@drawable/ic_add_perso"
         app:showAsAction="always"/>
 
+
+    <item android:id="@+id/menu_goProfile"
+        android:title="Profile"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_edit_profile"
+
+        />
+
     <item android:id="@+id/logoutForAmbassador"
         android:title="Log out"
         android:icon="@drawable/ic_baseline_exit"

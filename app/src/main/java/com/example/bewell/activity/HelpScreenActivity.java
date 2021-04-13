@@ -2,6 +2,8 @@ package com.example.bewell.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +12,25 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.bewell.R;
+import com.example.bewell.adapters.BlogRecViewAdapter;
+import com.example.bewell.models.Blog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HelpScreenActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class HelpScreenActivity extends AppCompatActivity implements BlogRecViewAdapter.OnBlogListener {
 
 
     private Button conversationBtn;
     private Button showAllAmbassadorBtn;
     private FirebaseAuth mAuth;;
+    private RecyclerView mentalHealhtRecView;
+    private RecyclerView fitnessHealthRecView;
+    private RecyclerView mealRecView;
+    private BlogRecViewAdapter blogAdapter;
+    private ArrayList<Blog>  blogsFromServer  =   new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +50,26 @@ public class HelpScreenActivity extends AppCompatActivity {
         conversationBtn.setOnClickListener(helpPageButtonListener);
         showAllAmbassadorBtn.setOnClickListener(helpPageButtonListener);
 
+        mentalHealhtRecView =  findViewById(R.id.meantalHealthBlogRecycleView);
+        fitnessHealthRecView =  findViewById(R.id.fitnessBlogRecViews);
+        mealRecView = findViewById(R.id.MealBlogRecViews);
 
 
+        blogAdapter =  new BlogRecViewAdapter(this);
+        blogsFromServer.add(new Blog("Title placeholder for blog"));
+        blogsFromServer.add(new Blog("Title placeholder for blog 2"));
+        blogsFromServer.add(new Blog("Title placeholder for blog 3"));
+
+        blogAdapter.setBlogs(blogsFromServer);
+
+
+        mentalHealhtRecView.setAdapter(blogAdapter);
+        fitnessHealthRecView.setAdapter(blogAdapter);
+        mealRecView.setAdapter(blogAdapter);
+
+        mentalHealhtRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        fitnessHealthRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        mealRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
     }
 
 
@@ -104,5 +134,10 @@ public class HelpScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBlogClick(int position) {
+
     }
 }

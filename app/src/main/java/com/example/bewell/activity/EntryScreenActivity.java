@@ -34,9 +34,19 @@ import com.example.bewell.entryScreens.ExerciseEntry;
 import com.example.bewell.models.Exercise;
 import com.example.bewell.requestCodes.RequestCode;
 import com.example.bewell.requestCodes.ResultCode;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EntryScreenActivity extends AppCompatActivity implements ExerciseRecViewAdapter.OnExerciseListener, FoodRecViewAdapter.OnFoodListener, MoodQuestionsAdapter.MoodListener {
@@ -63,18 +73,26 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
     private ArrayList<Food>  lunchData  =  new ArrayList<>();
     private ArrayList<Food>  dinnerData  =  new ArrayList<>();
 
-    private Boolean belongToBreakfast = false;
-    private Boolean belongToLunch = false;
-    private Boolean belongToDinner = false;
-
-
-
-
     private RecyclerView moodQuestionRecView;
     private ArrayList<MoodQuestion> moodQuestions =  new ArrayList<>();
     private MoodQuestionsAdapter moodQuestionsAdapter;
-
     private MoodOfTheDay userMoodOfDay;
+
+
+
+    private MaterialTextView breakFastTotalCaloriesTxt;
+    private MaterialTextView lunchTotalCaloriesTxt;
+    private MaterialTextView dinnerTotalCaloriesTxt;
+    private MaterialTextView  caloriesBurnedExerciseTxt;
+
+
+
+    private int totalBrekfastCalories;
+    private int totalDinnerCalories;
+    private int totalLunchCalories;
+    private int totalCalories;
+    private int totalCaloriesBurned;
+
 
     private Button buttonMood100;
     private Button buttonMood80;
@@ -99,6 +117,7 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         initializeViews();
         initializeViewsMood();
         initializeButtonMoood();
+        getUserDataLoggedIn();
 
 
 
@@ -120,8 +139,57 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
 
         statusUserTextView   = findViewById(R.id.moodStatusValue);
         statusUserTextView.setText(userMoodOfDay.getValueStatus() + "%");
+        breakFastTotalCaloriesTxt  =  findViewById(R.id.totalBreakfastCalories);
+        lunchTotalCaloriesTxt = findViewById(R.id.totalLunchCalories);
+        dinnerTotalCaloriesTxt = findViewById(R.id.totalDinnerCalories);
+        caloriesBurnedExerciseTxt = findViewById(R.id.totalCaloriesBurnedFromExercise);
+//        calculateTotalsFromMeals();
+//        calculateTotalsFromExercise();
+
+    }
 
 
+
+    private void calculateTotalsFromMeals(){
+        totalBrekfastCalories = calculateTotalMeal(breakFastData);
+        totalLunchCalories = calculateTotalMeal(lunchData);
+        totalDinnerCalories = calculateTotalMeal(dinnerData);
+
+        totalCalories  =  totalBrekfastCalories + totalLunchCalories + totalDinnerCalories;
+
+        breakFastTotalCaloriesTxt.setText(totalBrekfastCalories + " "  + "kcal");
+        lunchTotalCaloriesTxt.setText(totalLunchCalories + " "  + "kcal");
+        dinnerTotalCaloriesTxt.setText(totalDinnerCalories + " "  + "kcal");
+
+
+
+
+    }
+
+    private void sendTotalCaloriesToServer(){
+        updateSingleValue("totalCalories", totalCalories);
+        //Breakfast
+        updateNestedValueFood("brekfast", "foods", breakFastData);
+        updateNestedValueTotalMeals("brekfast", "totalCaloriesMeals", totalBrekfastCalories);
+
+        updateNestedValueFood("lunch", "foods", lunchData);
+        updateNestedValueTotalMeals("lunch", "totalCaloriesMeals", totalLunchCalories);
+
+        updateNestedValueFood("dinner", "foods", dinnerData);
+        updateNestedValueTotalMeals("dinner", "totalCaloriesMeals", totalDinnerCalories);
+    }
+    private void sendTotalCaloriesBurnedToServer(){
+        updateSingleValue("totalCaloriesBurned", totalCaloriesBurned);
+        updateNestedValueExercise("exercises", userExercises);
+
+    }
+
+
+
+
+    private void calculateTotalsFromExercise(){
+        totalCaloriesBurned = calculateTotalCaloriesBurned(userExercises);
+        caloriesBurnedExerciseTxt.setText(totalCaloriesBurned +  " kcal");
     }
 
 
@@ -168,18 +236,18 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         context = this;
 
         //Add mock elements in the list array
-        userExercises.add(new Exercise("n", 1, 2, 3, 200));
-        userExercises.add(new Exercise("name", 1, 2, 3, 200));
-        userExercises.add(new Exercise("tyujj", 1, 2, 3, 200));
-
-        breakFastData.add(new Food("Food1", 23445, 23443, 3243, 466, TypeFood.BREAKFAST));
-        breakFastData.add(new Food("Food2", 34, 23443, 3243, 466,TypeFood.BREAKFAST));
-
-        lunchData.add(new Food("lunch1", 54, 66, 78, 99, TypeFood.LUNCH));
-        lunchData.add(new Food("lunch2", 334, 67, 789, 909, TypeFood.LUNCH));
-
-        dinnerData.add(new Food("Dinner1", 67, 889, 34, 8, TypeFood.DINNER));
-        dinnerData.add(new Food("Dinner2", 455, 12, 334, 8, TypeFood.DINNER));
+//        userExercises.add(new Exercise("n", 1, 2, 3, 200));
+//        userExercises.add(new Exercise("name", 1, 2, 3, 200));
+//        userExercises.add(new Exercise("tyujj", 1, 2, 3, 200));
+//
+//        breakFastData.add(new Food("Food1", 23445, 23443, 3243, 466, TypeFood.BREAKFAST));
+//        breakFastData.add(new Food("Food2", 34, 23443, 3243, 466,TypeFood.BREAKFAST));
+//
+//        lunchData.add(new Food("lunch1", 54, 66, 78, 99, TypeFood.LUNCH));
+//        lunchData.add(new Food("lunch2", 334, 67, 789, 909, TypeFood.LUNCH));
+//
+//        dinnerData.add(new Food("Dinner1", 67, 889, 34, 8, TypeFood.DINNER));
+//        dinnerData.add(new Food("Dinner2", 455, 12, 334, 8, TypeFood.DINNER));
 
         //Adapter set up | exercise
         adapter = new ExerciseRecViewAdapter(this);
@@ -215,35 +283,164 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
 
     }
 
-    //Set up the bottom navigation
-    private void setUpBottomNavigation() {
-        BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
-        bottomNavigationView1.setSelectedItemId(R.id.EntryScreenItem);
-        bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
+    private void getUserDataLoggedIn(){
+        FirebaseUser currentUserLogged = FirebaseAuth.getInstance().getCurrentUser();
+        String uid  = currentUserLogged.getUid();
+        String path   = "Users/" + uid;
+
+        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String totalCaloriesTxt   = (String) snapshot.child("totalCalories").getValue().toString();
+                String totalBurnedTxt = (String) snapshot.child("totalCaloriesBurned").getValue().toString();
+                //Breakfast
+                String totalCaloriesBreakfastServer  = (String) snapshot.child("brekfast").child("totalCaloriesMeals").getValue().toString();
+                DataSnapshot brekfastFromServer  = snapshot.child("brekfast").child("foods");
+                //Lunch
+                String totalCaloriesLunchServer  = (String) snapshot.child("lunch").child("totalCaloriesMeals").getValue().toString();
+                DataSnapshot lunchFromServer  = snapshot.child("lunch").child("foods");
+                //Dinner
+                String totalCaloriesDinnerServer  = (String) snapshot.child("dinner").child("totalCaloriesMeals").getValue().toString();
+                DataSnapshot dinnerFromServer = snapshot.child("dinner").child("foods");
 
-                switch (item.getItemId()) {
-                    case R.id.EntryScreenItem:
-                        return true;
-                    case R.id.HomeScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.HelpScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.SettingsScreenItem:
-                        startActivity(new Intent(getApplicationContext(), SettingsScreenActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                //Exerrcie
+                DataSnapshot exerciseArrayFromServer  = snapshot.child("exercises");
+                retriveEntryExercisesFromServer(exerciseArrayFromServer);
 
-                }
-                return false;
+
+
+
+
+
+
+
+
+
+
+                 totalCalories = Integer.parseInt( totalCaloriesTxt);
+                 totalCaloriesBurned =  Integer.parseInt(totalBurnedTxt);
+                 //Change textfield
+                caloriesBurnedExerciseTxt.setText(totalBurnedTxt + " kcal");
+                //Assignments - Breakfast
+                 breakFastTotalCaloriesTxt.setText(totalCaloriesBreakfastServer + " kcal");
+                totalBrekfastCalories = Integer.parseInt(totalCaloriesBreakfastServer);
+                retriveEntryBreakfastFromServer(brekfastFromServer);
+
+                //Assignments - Brekfast
+                lunchTotalCaloriesTxt.setText(totalCaloriesLunchServer + " kcal");
+                totalLunchCalories = Integer.parseInt(totalCaloriesLunchServer);
+                retriveEntryLunchFromServer(lunchFromServer);
+
+
+                //Assignments - Dinner
+                dinnerTotalCaloriesTxt.setText(totalCaloriesDinnerServer + " kcal");
+                totalDinnerCalories = Integer.parseInt(totalCaloriesDinnerServer);
+                retriveEntryDinnerFromServer(dinnerFromServer);
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
+
+    private void retriveEntryBreakfastFromServer(DataSnapshot breakfastFromServer){
+        if (breakfastFromServer != null){
+            ArrayList<Food> foodsCopy =  new ArrayList<>();
+            for(DataSnapshot snapShot : breakfastFromServer.getChildren()){
+                String nameFood = (String) snapShot.child("name").getValue().toString();
+                String protein = (String) snapShot.child("protein").getValue().toString();
+                String calories = (String) snapShot.child("calories").getValue().toString();
+                String carbs = (String) snapShot.child("carbs").getValue().toString();
+                String fats = (String) snapShot.child("fats").getValue().toString();
+                String typeFood = (String)snapShot.child("typeFood").getValue();
+                TypeFood typeFoodEnum  =  TypeFood.valueOf(typeFood);
+                Food newFood =  new Food(nameFood,Integer.parseInt(calories),Integer.parseInt(protein),Integer.parseInt(carbs),Integer.parseInt(fats), typeFoodEnum);
+                foodsCopy.add(newFood);
+            }
+            breakFastData = foodsCopy;
+            brekfastAdapter.setFoods(breakFastData);
+        }
+
+
+    }
+
+
+    private void retriveEntryLunchFromServer(DataSnapshot lunchFromServer){
+        if (lunchFromServer != null){
+            ArrayList<Food> foodsCopy =  new ArrayList<>();
+            for(DataSnapshot snapShot : lunchFromServer.getChildren()){
+                String nameFood = (String) snapShot.child("name").getValue().toString();
+                String protein = (String) snapShot.child("protein").getValue().toString();
+                String calories = (String) snapShot.child("calories").getValue().toString();
+                String carbs = (String) snapShot.child("carbs").getValue().toString();
+                String fats = (String) snapShot.child("fats").getValue().toString();
+                String typeFood = (String)snapShot.child("typeFood").getValue();
+                TypeFood typeFoodEnum  =  TypeFood.valueOf(typeFood);
+                Food newFood =  new Food(nameFood,Integer.parseInt(calories),Integer.parseInt(protein),Integer.parseInt(carbs),Integer.parseInt(fats), typeFoodEnum);
+                foodsCopy.add(newFood);
+            }
+            lunchData = foodsCopy;
+            lunchAdapter.setFoods(lunchData);
+        }
+
+
+    }
+
+
+    private void retriveEntryDinnerFromServer(DataSnapshot dinnerFromServer){
+        if (dinnerFromServer != null){
+            ArrayList<Food> foodsCopy =  new ArrayList<>();
+            for(DataSnapshot snapShot : dinnerFromServer.getChildren()){
+                String nameFood = (String) snapShot.child("name").getValue().toString();
+                String protein = (String) snapShot.child("protein").getValue().toString();
+                String calories = (String) snapShot.child("calories").getValue().toString();
+                String carbs = (String) snapShot.child("carbs").getValue().toString();
+                String fats = (String) snapShot.child("fats").getValue().toString();
+                String typeFood = (String)snapShot.child("typeFood").getValue();
+                TypeFood typeFoodEnum  =  TypeFood.valueOf(typeFood);
+                Food newFood =  new Food(nameFood,Integer.parseInt(calories),Integer.parseInt(protein),Integer.parseInt(carbs),Integer.parseInt(fats), typeFoodEnum);
+                foodsCopy.add(newFood);
+            }
+            dinnerData = foodsCopy;
+            dinnerAdapter.setFoods(dinnerData);
+        }
+
+
+    }
+
+
+
+    private void retriveEntryExercisesFromServer(DataSnapshot exercisesFromServer){
+        if (exercisesFromServer != null){
+            ArrayList<Exercise> exerciseCopy =  new ArrayList<>();
+            for(DataSnapshot snapShot : exercisesFromServer.getChildren()){
+                String nameExercise = (String) snapShot.child("name").getValue().toString();
+                String sets = (String) snapShot.child("sets").getValue().toString();
+                String repetitions = (String) snapShot.child("repetitions").getValue().toString();
+                String duration = (String) snapShot.child("duration").getValue().toString();
+                String caloriesBurned = (String) snapShot.child("caloriesBurned").getValue().toString();
+                Exercise newExercise =  new Exercise(nameExercise, Integer.parseInt(sets),Integer.parseInt(repetitions), Integer.parseInt(duration), Integer.parseInt(caloriesBurned));
+                exerciseCopy.add(newExercise);
+            }
+            userExercises = exerciseCopy;
+            adapter.setExercises(userExercises);
+        }
+
+
+    }
+
+
+
 
 
     //Button on click listener manager
@@ -273,6 +470,9 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
             }
         }
     };
+
+
+
 
 
     private View.OnClickListener buttonMoodListener   = new View.OnClickListener() {
@@ -390,6 +590,24 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
 
 
 
+    private int calculateTotalMeal (ArrayList<Food> foods){
+        int total = 0;
+        for(Food food : foods){
+            total += food.getCalories();
+        }
+        return total;
+    }
+
+    private int calculateTotalCaloriesBurned(ArrayList<Exercise> exercises){
+        int total  =  0;
+        for (Exercise exerise : exercises){
+            total  += exerise.getCaloriesBurned();
+        }
+        return total;
+    }
+
+
+
 
     //Add new fitness record button method
     private void goToCreateFitness() {
@@ -476,6 +694,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         Food  foodToAdd = data.getParcelableExtra(PutExtra.NEW_FOOD_BREKFAST);
         breakFastData.add(foodToAdd);
         brekfastAdapter.setFoods(breakFastData);
+        calculateTotalsFromMeals();
+        sendTotalCaloriesToServer();
     }
 
 
@@ -495,6 +715,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
                 updateDinnerData(foodToEdit, positionFood);
                 break;
         }
+        calculateTotalsFromMeals();
+        sendTotalCaloriesToServer();
 
 
 
@@ -517,6 +739,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
                 break;
         }
 
+        calculateTotalsFromMeals();
+        sendTotalCaloriesToServer();
 
 
     }
@@ -557,6 +781,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         Food  foodToAdd = data.getParcelableExtra(PutExtra.NEW_FOOD_LUNCH);
         lunchData.add(foodToAdd);
         lunchAdapter.setFoods(lunchData);
+        calculateTotalsFromMeals();
+        sendTotalCaloriesToServer();
     }
 
 
@@ -565,6 +791,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         Food  foodToAdd = data.getParcelableExtra(PutExtra.NEW_FOOD_DINNER);
         dinnerData.add(foodToAdd);
         dinnerAdapter.setFoods(dinnerData);
+        calculateTotalsFromMeals();
+        sendTotalCaloriesToServer();
     }
 
     //Create a new exercise and add to the array list
@@ -572,6 +800,8 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         Exercise exerciseToAdd = data.getParcelableExtra(PutExtra.NEW_EXERCISE);
         userExercises.add(exerciseToAdd);
         adapter.setExercises(userExercises);
+        calculateTotalsFromExercise();
+        sendTotalCaloriesBurnedToServer();
 
     }
 
@@ -580,12 +810,16 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         Exercise exerciseToEdit = data.getParcelableExtra(PutExtra.UPDATE_EXCERCISE);
         userExercises.set(positionArray, exerciseToEdit);
         adapter.setExercises(userExercises);
+        calculateTotalsFromExercise();
+        sendTotalCaloriesBurnedToServer();
     }
 
     //Delete an exercise at position passed
     private void deleteFitnessEntry(int positionArray) {
         userExercises.remove(positionArray);
         adapter.setExercises(userExercises);
+        calculateTotalsFromExercise();
+        sendTotalCaloriesBurnedToServer();
     }
 
     @Override
@@ -672,4 +906,65 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
         return;
 
     }
+
+
+    //Set up the bottom navigation
+    private void setUpBottomNavigation() {
+        BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottomNavigation);
+        bottomNavigationView1.setSelectedItemId(R.id.EntryScreenItem);
+        bottomNavigationView1.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.EntryScreenItem:
+                        return true;
+                    case R.id.HomeScreenItem:
+                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.HelpScreenItem:
+                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.SettingsScreenItem:
+                        startActivity(new Intent(getApplicationContext(), SettingsScreenActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
+    }
+
+
+    private void updateSingleValue(String pathToChange, int valueToInsert){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid   = currentUser.getUid();
+        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Users").child(uid).child(pathToChange);
+        ref.setValue(valueToInsert);
+    }
+
+    private void updateNestedValueFood(String pathToChange, String subPath , ArrayList<Food> foods){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid   = currentUser.getUid();
+        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Users").child(uid).child(pathToChange).child(subPath);
+        ref.setValue(foods);
+    }
+
+    private void updateNestedValueExercise(String pathToChange , ArrayList<Exercise> exercises){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid   = currentUser.getUid();
+        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Users").child(uid).child(pathToChange);
+        ref.setValue(exercises);
+    }
+
+    private void updateNestedValueTotalMeals(String pathToChange, String subPath , int total){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid   = currentUser.getUid();
+        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Users").child(uid).child(pathToChange).child(subPath);
+        ref.setValue(total);
+    }
+
 }

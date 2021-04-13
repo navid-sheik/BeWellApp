@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         card_view:cardPreventCornerOverlap="false"
         android:layout_weight="0.3"
-        android:background="@color/yellow"
         app:cardCornerRadius="2sp"
 
         >
@@ -21,8 +20,8 @@
         <ImageView
             android:id="@+id/ambassadorPic"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_add_perso"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_person"
             android:background="@color/greyButton"
             />
     </androidx.cardview.widget.CardView>
@@ -36,13 +35,13 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.7"
-        android:text="Navid sheikh"
+        android:text=""
         android:background="@color/greyButton"
         android:lines="1"
         android:gravity="center"
         android:textAlignment="textStart"
         card_view:ignore="RtlCompat"
-        android:layout_marginStart="10dp"
+        android:paddingLeft="10dp"
 
 
         />

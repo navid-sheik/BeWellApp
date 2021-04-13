@@ -6,36 +6,26 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class Meal implements Parcelable {
-    private String id;
-    private String mealDate;
     private ArrayList<Food> foods;
+    private int totalCaloriesMeals;
 
 
-    public Meal(String id, String mealDate, ArrayList<Food> foods) {
-        this.id = id;
-        this.mealDate = mealDate;
+    public Meal(ArrayList<Food> foods, int totalCaloriesMeals) {
         this.foods = foods;
-
-
+        this.totalCaloriesMeals = totalCaloriesMeals;
     }
+
+    public Meal() {
+        this.foods = null;
+        totalCaloriesMeals = 0;
+    }
+
+
 
 
     protected Meal(Parcel in) {
-        id = in.readString();
-        mealDate = in.readString();
         foods = in.createTypedArrayList(Food.CREATOR);
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(mealDate);
-        dest.writeTypedList(foods);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        totalCaloriesMeals = in.readInt();
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -50,20 +40,15 @@ public class Meal implements Parcelable {
         }
     };
 
-    public String getId() {
-        return id;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getMealDate() {
-        return mealDate;
-    }
-
-    public void setMealDate(String mealDate) {
-        this.mealDate = mealDate;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(foods);
+        dest.writeInt(totalCaloriesMeals);
     }
 
     public ArrayList<Food> getFoods() {
@@ -72,6 +57,18 @@ public class Meal implements Parcelable {
 
     public void setFoods(ArrayList<Food> foods) {
         this.foods = foods;
+    }
+
+    public int getTotalCaloriesMeals() {
+        return totalCaloriesMeals;
+    }
+
+    public void setTotalCaloriesMeals(int totalCaloriesMeals) {
+        this.totalCaloriesMeals = totalCaloriesMeals;
+    }
+
+    public static Creator<Meal> getCREATOR() {
+        return CREATOR;
     }
 
 

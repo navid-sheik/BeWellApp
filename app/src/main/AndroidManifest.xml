@@ -19,11 +19,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
-        <activity android:name=".activity.Update_Profile"></activity>
+        <activity android:name=".activity.Update_Profile" />
         <activity
             android:name=".activity.AmbassadorsConversationActivity"
             android:theme="@style/Theme.BeWellActionBar">
@@ -50,12 +47,10 @@
         </activity>
         <activity android:name=".activity.SettingsScreenActivity" />
         <activity android:name=".activity.PreRegistrationActivity" />
-        <activity android:name=".activity.LoginScreenActivity"></activity>
+        <activity android:name=".activity.LoginScreenActivity" />
         <activity android:name=".activity.RegistrationScreenActivity" />
         <activity android:name=".activity.HelpScreenActivity" />
-        <activity android:name=".activity.HomeScreenActivity">
-
-        </activity>
+        <activity android:name=".activity.HomeScreenActivity"></activity>
         <activity
             android:name=".entryScreens.AddFood"
             android:label="@string/title_activity_add_food" />

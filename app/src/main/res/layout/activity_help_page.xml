@@ -89,6 +89,8 @@
             android:id="@+id/buttonReportContainer"
             android:layout_marginTop="20dp"
             android:weightSum="2"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
 
             >
 
@@ -100,9 +102,8 @@
                 android:backgroundTint="@color/greyButton"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="10dp"
                 app:cornerRadius="5dp"
+                android:layout_marginEnd="5dp"
 
                 />
 
@@ -114,9 +115,8 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/greyButton"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
                 app:cornerRadius="5dp"
+                android:layout_marginStart="5dp"
 
                 />
 
@@ -134,12 +134,14 @@
 
             android:layout_below="@+id/buttonReportContainer"
             android:layout_marginTop="15dp"
+            android:padding="10dp"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fitness Blogs"
                 android:textSize="20dp"
+                android:textStyle="italic"
 
                 />
 
@@ -150,7 +152,10 @@
                 android:layout_height="200dp"
                 android:id="@+id/fitnessBlogRecViews"
                 android:background="@drawable/borderbottom"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop= "20dp"
+                android:layout_marginBottom="10dp"
+
+
 
                 />
 
@@ -170,6 +175,7 @@
             android:orientation="vertical"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/fitnessBlogContainer"
+            android:padding="10dp"
             >
 
 
@@ -179,14 +185,20 @@
                 android:layout_height="wrap_content"
                 android:text="Food Blogs"
                 android:textSize="20dp"
-
+                android:textStyle="italic"
                 />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/MealRecViews"
+            android:id="@+id/MealBlogRecViews"
             android:background="@drawable/borderbottom"
+            android:layout_marginTop= "20dp"
+            android:layout_marginBottom="10dp"
+
+
+
+
 
 
 
@@ -206,6 +218,7 @@
             android:layout_marginTop="15dp"
             android:layout_below="@+id/FoodBlogContainer"
             android:layout_marginBottom="100dp"
+            android:padding="10dp"
             >
 
 
@@ -215,14 +228,18 @@
                 android:layout_height="wrap_content"
                 android:text="Mental Health Blogs"
                 android:textSize="20dp"
+                android:textStyle="italic"
 
                 />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:id="@+id/meantalHealthRecycleView"
+                android:id="@+id/meantalHealthBlogRecycleView"
                 android:background="@drawable/borderbottom"
+                android:layout_marginTop= "20dp"
+                android:layout_marginBottom="10dp"
+
 
 
                 />

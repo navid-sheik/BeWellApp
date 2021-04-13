@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.example.bewell.R;
 import com.example.bewell.adapters.AmbassadorRecViewAdapter;
@@ -35,7 +36,7 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dsiplay_ambassadors_conversation_page);
-        getSupportActionBar().setTitle("Select Ambassador");
+
         currentUser();
         initializeViews();
         fetchUsers ();
@@ -82,6 +83,11 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
                     boolean type =  (boolean) snapshot.child("employeeType").getValue();
                     User  currentUserFromServ = new User(userId,empId,name,  surname, email, type);
                     currentUserData =  currentUserFromServ;
+                    if (type == false){
+                        getSupportActionBar().setTitle("Select Ambassador");
+                    }else {
+                        getSupportActionBar().setTitle("Select Employee");
+                    }
                 }
 
                 @Override
@@ -146,4 +152,11 @@ public class AmbassadorsConversationActivity extends AppCompatActivity implement
 
     }
 
+
+
+    @Override
+    public void onBackPressed() {
+        Log.v("back pressed", "going back");
+        super.onBackPressed();
+    }
 }
