@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyMenuUnSelectedItem"
     tools:context=".activity.HomeScreenActivity">
 
     <TextView
@@ -60,7 +59,7 @@
         android:layout_marginTop="227dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="472dp"
-        android:background="@color/silver"
+        android:background="@color/greyMenuSelectedItem"
         android:fontFamily="sans-serif-black"
         android:text="Burned Calories" />
 
@@ -91,7 +90,7 @@
         android:layout_marginTop="348dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="351dp"
-        android:background="@color/silver"
+        android:background="@color/greyMenuSelectedItem"
         android:fontFamily="sans-serif-black"
         android:text="Gained Calories" />
 
@@ -107,7 +106,7 @@
         android:layout_marginTop="116dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="586dp"
-        android:background="@color/silver"
+        android:background="@color/greyMenuSelectedItem"
         android:fontFamily="sans-serif-black"
         android:text="Total Calories" />
 
@@ -183,7 +182,7 @@
         android:layout_marginTop="468dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="231dp"
-        android:background="@color/silver"
+        android:background="@color/greyMenuSelectedItem"
         android:fontFamily="sans-serif-black"
         android:text="Step Count" />
 
