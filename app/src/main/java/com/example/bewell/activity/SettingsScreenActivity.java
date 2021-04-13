@@ -223,7 +223,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                 }
                 else if (which==1){
                     pd.setMessage("Updating Weight");
-                    showEmailUpdateDialog("weight", weightTextView, "Kg");
+                    showEmailUpdateDialog("weight", weightTextView, "kg");
                 }
 
             }
@@ -238,7 +238,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
     private void showEmailUpdateDialog(String key, TextView textView, String measurements) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(SettingsScreenActivity.this);
-        builder.setTitle("Update " + key +  " " + measurements);
+        builder.setTitle("Update " + key +  " in " + measurements);
 
         LinearLayout linearLayout = new LinearLayout(SettingsScreenActivity.this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -252,7 +252,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int unit) {
 
                 String value = editText.getText().toString().trim();
 
@@ -265,7 +265,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     pd.dismiss();
-                                    textView.setText(value);
+                                    textView.setText("Height |" + value + " " + unit);
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })

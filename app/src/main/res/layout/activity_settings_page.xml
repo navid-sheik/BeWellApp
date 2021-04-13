@@ -70,7 +70,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/profile_picture"
             android:layout_below="@+id/topContainerSettingView"
-            android:background="@color/gray"
+
             >
 
             <ImageView
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:id="@+id/resetPassword"
-                android:hint="@string/password"
+                android:hint="Reset Password"
                 android:ems="10"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/greyButton"
