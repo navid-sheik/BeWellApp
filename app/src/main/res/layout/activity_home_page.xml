@@ -27,9 +27,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="294dp"
+        android:layout_marginTop="292dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="418dp"
+        android:layout_marginBottom="420dp"
+        android:background="@drawable/borderbottom"
         android:text="Your Daily Goal: 1000 kcal" />
 
     <TextView
@@ -44,6 +45,7 @@
         android:layout_marginBottom="636dp"
         android:fontFamily="sans-serif-black"
         android:text="Todays Statistics"
+        android:textAlignment="center"
         android:textSize="24sp" />
 
     <TextView
@@ -58,11 +60,12 @@
         android:layout_marginTop="227dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="472dp"
+        android:background="@color/silver"
         android:fontFamily="sans-serif-black"
         android:text="Burned Calories" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/burnedCalories"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:layout_alignParentStart="true"
@@ -70,10 +73,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="261dp"
+        android:layout_marginTop="259dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="436dp"
-        android:text="1000.00 kcal" />
+        android:layout_marginBottom="438dp"
+        android:text="1000.00 kcal"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView21"
@@ -84,9 +88,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="343dp"
+        android:layout_marginTop="348dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="350dp"
+        android:layout_marginBottom="351dp"
+        android:background="@color/silver"
         android:fontFamily="sans-serif-black"
         android:text="Gained Calories" />
 
@@ -102,11 +107,12 @@
         android:layout_marginTop="116dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="586dp"
+        android:background="@color/silver"
         android:fontFamily="sans-serif-black"
         android:text="Total Calories" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/totalCalories"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:layout_alignParentStart="true"
@@ -117,7 +123,8 @@
         android:layout_marginTop="145dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="553dp"
-        android:text="1000.00 kcal" />
+        android:text="1000.00 kcal"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView14"
@@ -131,10 +138,11 @@
         android:layout_marginTop="178dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="535dp"
+        android:background="@drawable/borderbottom"
         android:text="Your Daily Goal: 2000 kcal" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/gainedCalories"
         android:layout_width="69dp"
         android:layout_height="32dp"
         android:layout_alignParentStart="true"
@@ -142,10 +150,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="383dp"
+        android:layout_marginTop="380dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="316dp"
-        android:text="4000.00 kcal" />
+        android:layout_marginBottom="319dp"
+        android:text="4000.00 kcal"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView23"
@@ -156,9 +165,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="414dp"
+        android:layout_marginTop="412dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="301dp"
+        android:layout_marginBottom="303dp"
+        android:background="@drawable/borderbottom"
         android:text="Your Daily Goal: 2000 kcal" />
 
     <TextView
@@ -170,9 +180,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="462dp"
+        android:layout_marginTop="468dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="231dp"
+        android:background="@color/silver"
         android:fontFamily="sans-serif-black"
         android:text="Step Count" />
 
@@ -184,26 +195,28 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="101dp"
         android:layout_marginTop="501dp"
         android:layout_marginEnd="173dp"
         android:layout_marginBottom="158dp"
         android:text="10,000"
+        android:textAlignment="center"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView26"
-        android:layout_width="48dp"
+        android:layout_width="61dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="182dp"
-        android:layout_marginTop="548dp"
-        android:layout_marginEnd="181dp"
-        android:layout_marginBottom="164dp"
-        android:text="Steps" />
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="538dp"
+        android:layout_marginEnd="209dp"
+        android:layout_marginBottom="174dp"
+        android:text="Steps"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView27"
@@ -246,6 +259,7 @@
         android:layout_marginTop="572dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="140dp"
+        android:background="@drawable/borderbottom"
         android:text="Your Daily Goal: 12000 Steps" />
 
 
@@ -260,6 +274,48 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="259dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="586dp"
+        app:srcCompat="@drawable/ic_food" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="36dp"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="259dp"
+        android:layout_marginTop="348dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="351dp"
+        app:srcCompat="@drawable/ic_add" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="259dp"
+        android:layout_marginTop="227dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="472dp"
+        app:srcCompat="@drawable/ic__fitness_center" />
 
 
 </RelativeLayout>
