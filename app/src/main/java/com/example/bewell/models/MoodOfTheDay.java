@@ -62,6 +62,9 @@ public class MoodOfTheDay {
 
 
     public int getTotalValue() {
+        if (totalValue > 100){
+            return 100;
+        }
         return totalValue ;
     }
 }

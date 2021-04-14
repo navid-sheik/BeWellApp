@@ -3,11 +3,14 @@ package com.example.bewell.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
@@ -115,10 +118,16 @@ public class LoginScreenActivity extends AppCompatActivity {
         });
 
 
-
-
         forgotPassTxtView = findViewById(R.id.forgotPassword);
-        forgotPassTxtView.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Function not available yet", Toast.LENGTH_SHORT).show());
+        forgotPassTxtView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPassword();
+            }
+        });
+
+
+
         loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(loginPageListener);
         goToRegisterTxtView = findViewById(R.id.goToRegisterTxt);
@@ -128,6 +137,55 @@ public class LoginScreenActivity extends AppCompatActivity {
                 goToRegistrationPage();
             }
         });
+    }
+
+    public void resetPassword(){
+        final String Expn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please enter your email");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String forgotEmailString = input.getText().toString();
+                if(!forgotEmailString.matches(Expn)){
+                    Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(forgotEmailString).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "Success , check your email address ", Toast.LENGTH_LONG).show();
+
+                            }else {
+                                Toast.makeText(getApplicationContext(), "Problem , something went wrong ", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+
     }
 
     private void setOkView(EditText text) {

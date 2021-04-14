@@ -127,9 +127,9 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
 
     private void initializeViewsMood() {
 
-        moodQuestions.add(new MoodQuestion("Do you feeling sad?", TypeQuestion.NEGATIVE));
-        moodQuestions.add(new MoodQuestion("Do you feeling happy?", TypeQuestion.POSITIVE));
-        moodQuestions.add(new MoodQuestion("Do you feeling tired?", TypeQuestion.NEGATIVE));
+        moodQuestions.add(new MoodQuestion("Are you feeling sad?", TypeQuestion.NEGATIVE));
+        moodQuestions.add(new MoodQuestion("Are you feeling happy?", TypeQuestion.POSITIVE));
+        moodQuestions.add(new MoodQuestion("Are you feeling tired?", TypeQuestion.NEGATIVE));
         userMoodOfDay = new MoodOfTheDay("today", 0, moodQuestions, 0);
         moodQuestionRecView = findViewById(R.id.moodRecycleView);
         moodQuestionsAdapter = new MoodQuestionsAdapter(this);

@@ -257,6 +257,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
                 String value = editText.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(value)){
+                    try{
+                        int intValue = Integer.parseInt(value);
+                    }
+                    catch (NumberFormatException e){
+                        Toast.makeText(SettingsScreenActivity.this, "Please enter a numeric value", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     pd.show();
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     DatabaseReference ref =  FirebaseDatabase.getInstance().getReference("Users").child(uid);
@@ -265,7 +272,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     pd.dismiss();
-                                    textView.setText("Height |" + value + " " + unit);
+                                    textView.setText("Height |" + value + " " + measurements);
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
