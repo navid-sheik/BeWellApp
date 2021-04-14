@@ -33,10 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-
-import static android.icu.text.UnicodeSet.CASE;
-
 public class SettingsScreenActivity extends AppCompatActivity {
 
     //Added by navid
@@ -272,7 +268,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     pd.dismiss();
-                                    textView.setText("Height |" + value + " " + measurements);
+                                    textView.setText(key + " |" + value + " " + measurements);
                                     Toast.makeText(SettingsScreenActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
