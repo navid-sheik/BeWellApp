@@ -121,7 +121,7 @@
         android:id="@+id/workoutDurationInputLayout"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
-        app:helperText="Optional | Min"
+        app:helperText="Approx. Minutes"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -148,7 +148,7 @@
         android:id="@+id/workoutCaloriesBurnedInputLayout"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
-        app:helperText="Kcal"
+        app:helperText="kcal"
         >
 
     <com.google.android.material.textfield.TextInputEditText

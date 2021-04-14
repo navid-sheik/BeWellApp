@@ -94,7 +94,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="1200 kcal"
+                    android:text=" kcal"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_weight="1"

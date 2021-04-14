@@ -88,7 +88,7 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
 //                User currentUserFromServ = new User(userId,empId,name,  surname, email, type);
                 isAmbassador =  type;
 
-                welcomeMessage.setText("Welcome back, " +  name );
+                welcomeMessage.setText("Welcome, " +  name );
                 totalCaloriesDay.setText(totalCaloriesString);
                 totalCalorieBurnedDay.setText(caloriesBurnedString);
 
@@ -136,22 +136,30 @@ public class HomeScreenActivity extends AppCompatActivity implements SensorEvent
 
                 switch (item.getItemId()) {
                     case R.id.EntryScreenItem:
-                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
+                        Intent entryScreenIntent =  new Intent(getApplicationContext(), EntryScreenActivity.class);
+                        //entryScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(entryScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.HomeScreenItem:
                         return true;
                     case R.id.HelpScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+                        Intent helpScreenIntent  =  new Intent(getApplicationContext(), HelpScreenActivity.class);
+                        //helpScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(helpScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.SettingsScreenItem:
-                        startActivity(new Intent(getApplicationContext(), SettingsScreenActivity.class));
+                        Intent  settingScreenIntent  =  new Intent(getApplicationContext(), SettingsScreenActivity.class);
+                        //settingScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(settingScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.ConversationAmbassadorScreen:
-                        startActivity(new Intent(getApplicationContext(), ConversationsScreenActivity.class));
+                        Intent conversationScreenIntent =  new Intent(getApplicationContext(), ConversationsScreenActivity.class);
+                        //conversationScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(conversationScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
 

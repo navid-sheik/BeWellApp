@@ -116,17 +116,23 @@ public class HelpScreenActivity extends AppCompatActivity implements BlogRecView
 
                 switch (item.getItemId()) {
                     case R.id.EntryScreenItem:
-                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
+                        Intent entryScreenIntent =  new Intent(getApplicationContext(), EntryScreenActivity.class);
+                        //entryScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(entryScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.HomeScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+                        Intent homeScreenIntent = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                        //homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.HelpScreenItem:
                         return true;
                     case R.id.SettingsScreenItem:
-                        startActivity(new Intent(getApplicationContext(), SettingsScreenActivity.class));
+                        Intent  settingScreenIntent  =  new Intent(getApplicationContext(), SettingsScreenActivity.class);
+                        //settingScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(settingScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
 

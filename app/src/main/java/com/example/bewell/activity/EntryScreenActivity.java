@@ -643,14 +643,14 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
             if (resultCode == ResultCode.CREATE_NEW_FOOD_BREKFAST){
                 createNewFoodForBreafast(data);
             }else {
-                Toast.makeText(EntryScreenActivity.this, "sommething wrong brekfast", Toast.LENGTH_LONG).show();
+                //Toast.makeText(EntryScreenActivity.this, "sommething wrong brekfast", Toast.LENGTH_LONG).show();
             }
         }
         else if (requestCode ==  RequestCode.CREATE_NEW_FOOD_LUNCH){
             if (resultCode == ResultCode.CREATE_NEW_FOOD_LUNCH){
                 createNewFoodForLunch(data);
             }else {
-                Toast.makeText(EntryScreenActivity.this, "sommething wrong with lunch ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(EntryScreenActivity.this, "sommething wrong with lunch ", Toast.LENGTH_LONG).show();
             }
 
         }
@@ -659,7 +659,7 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
             if (resultCode == ResultCode.CREATE_NEW_FOOD_DINNER){
                 createNewFoodForDinner(data);
             }else {
-                Toast.makeText(EntryScreenActivity.this, "sommething wrong with dinner ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(EntryScreenActivity.this, "sommething wrong with dinner ", Toast.LENGTH_LONG).show();
             }
 
         }
@@ -920,15 +920,21 @@ public class EntryScreenActivity extends AppCompatActivity implements ExerciseRe
                     case R.id.EntryScreenItem:
                         return true;
                     case R.id.HomeScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+                        Intent homeScreenIntent = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                        //homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.HelpScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+                        Intent helpScreenIntent  =  new Intent(getApplicationContext(), HelpScreenActivity.class);
+                        //helpScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(helpScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.SettingsScreenItem:
-                        startActivity(new Intent(getApplicationContext(), SettingsScreenActivity.class));
+                        Intent  settingScreenIntent  =  new Intent(getApplicationContext(), SettingsScreenActivity.class);
+                        //settingScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(settingScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
 

@@ -1,3 +1,8 @@
+
+
+
+
+
 package com.example.bewell.activity;
 
 import android.app.AlertDialog;
@@ -320,27 +325,35 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.EntryScreenItem:
-                        startActivity(new Intent(getApplicationContext(), EntryScreenActivity.class));
+                        Intent entryScreenIntent =  new Intent(getApplicationContext(), EntryScreenActivity.class);
+                        //entryScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(entryScreenIntent);
                         overridePendingTransition(0, 0);
-                        return true;
+                        return  true;
                     case R.id.HomeScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
+                        Intent homeScreenIntent = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                        //homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.HelpScreenItem:
-                        startActivity(new Intent(getApplicationContext(), HelpScreenActivity.class));
+                        Intent helpScreenIntent  =  new Intent(getApplicationContext(), HelpScreenActivity.class);
+                        //helpScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(helpScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.SettingsScreenItem:
                         return true;
 
                     case R.id.ConversationAmbassadorScreen:
-                        Intent intent =  new Intent(getApplicationContext(), ConversationsScreenActivity.class);
-                        intent.putExtra("type", isAmbassador);
-                        startActivity(intent);
 
+                        Intent conversationScreenIntent =  new Intent(getApplicationContext(), ConversationsScreenActivity.class);
+                        //conversationScreenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        conversationScreenIntent.putExtra("type", isAmbassador);
+                        startActivity(conversationScreenIntent);
                         overridePendingTransition(0, 0);
                         return true;
+
 
                 }
                 return false;

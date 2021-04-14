@@ -111,7 +111,7 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            app:helperText="Optional | Hint For protein"
+            app:helperText="Measured in kcal"
 
             >
 
@@ -139,7 +139,7 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            app:helperText="Optional | Hint For protein"
+            app:helperText="Measured in grams(g)"
 
             >
 
@@ -168,7 +168,7 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            app:helperText="Optional | Hint For Carb"
+            app:helperText="Measured in grams(g)"
 
             >
 
@@ -196,7 +196,7 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            app:helperText="Optional | Hint For Fats"
+            app:helperText="Measured in grams(g)"
 
             >
 

@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:maxWidth="240dp"
         android:layout_toLeftOf="@+id/cardViewPicTo"
-        android:text="Navid sheikh dhjdbjvbn fbvdbvnbvnvbncbvncbvncvbcnvbcnbvcnbvcnbvncbvncbvncbv hdfujicdhfusdysbycbshjcbsdhjcsbahabhcbchasbcnbvcnbvncbvnvcbvncbjhvfusdvhushcdsuffchsduoidweidjwidjaidjsajdiaidjasidsjaisjadaisdjioas"
+        android:text=""
         android:background="@color/greyButton"
         android:textStyle="bold"
         android:layout_marginEnd= "10dp"

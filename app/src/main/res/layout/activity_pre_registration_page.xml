@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PreRegistrationActivity">
+    tools:context=".activity.PreRegistrationActivity"
+    android:padding="40dp"
+    >
     <TextView
         android:id="@+id/choose"
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="136dp"
         android:text="Choose your account type"
+        android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -21,10 +24,11 @@
 
     <Button
         android:id="@+id/employeeOption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="156dp"
         android:text="Employee"
+        android:backgroundTint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/ambassadorOption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +37,10 @@
 
     <Button
         android:id="@+id/ambassadorOption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Health Ambassador"
+        android:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

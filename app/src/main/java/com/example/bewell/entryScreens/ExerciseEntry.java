@@ -19,7 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class ExerciseEntry extends AppCompatActivity {
     //TODO : errror top prevent empty entry is submitted
-    //TODO: implement total of the day
     private Button confirmEntryBtn;
     private Button cancelEntryBtn;
     private Boolean newRecord = true;
